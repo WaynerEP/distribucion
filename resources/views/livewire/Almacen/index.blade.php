@@ -1,14 +1,15 @@
 @section('titlePage')
-    <h3>Categorias</h3>
+    <h3>Almacenes</h3>
 @endsection
 @section('styles')
-<link href="assets/css/tables/table-basic.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/tables/table-basic.css" rel="stylesheet" type="text/css">
 @endsection
+
 <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
     <div class="statbox widget box box-shadow">
         <div class="widget-header">
             <div class="row p-3">
-                <div class="col-md-4 col-6">
+                <div class="col-md-4 col-8">
                     <div class="full-search search-form-overlay input-focused">
                         <form class="form-inline form-inline search mt-lg-0" role="search">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -20,14 +21,14 @@
                             <div class="search-bar">
                                 <input type="text" wire:model="search"
                                     class="form-control form-control-sm search-form-control ml-lg-auto"
-                                    placeholder="Search...">
+                                    placeholder="Buscar por descripción...">
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="col-md-8 col-6 text-right align-items-center my-auto">
+                <div class="col-md-8 col-4 text-right align-items-center my-auto">
                     <button class="btn btn-primary" wire:click="resetUI" data-toggle="modal"
-                        data-target="#categoryModal">
+                        data-target="#AlmacenModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-plus">
@@ -43,26 +44,38 @@
                     <thead>
                         <tr class="table-dark">
                             <th>Id</th>
+                            <th>Código</th>
                             <th>Descripción</th>
+                            <th>Ubicación</th>
+                            <th>Referencia</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($categories->count() > 0)
-                            @foreach ($categories as $category)
+                        @if ($almacenes->count() > 0)
+                            @foreach ($almacenes as $almacen)
                                 <tr>
-                                    <td>{{ $category->idCategoriaProducto }}</td>
-                                    <td>{{ $category->nombre }}</td>
+                                    <td>{{ $almacen->idAlmacen }}</td>
+                                    <td>{{ $almacen->codigo }}</td>
+                                    <td>{{ $almacen->nombre }}</td>
+                                    <td>{{ $almacen->direccion }}</td>
+                                    <td>
+                                        @if ($almacen->referencia)
+                                            {{ $almacen->referencia }}
+                                        @else
+                                            <span>-----</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <ul class="table-controls">
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    wire:click="Edit({{ $category->idCategoriaProducto }})"
-                                                    data-toggle="tooltip" data-placement="top" title=""
-                                                    data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-edit-2">
+                                                    wire:click="Edit({{ $almacen->idAlmacen }})" data-toggle="tooltip"
+                                                    data-placement="top" title="" data-original-title="Edit"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-edit-2">
                                                         <path
                                                             d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
                                                         </path>
@@ -71,7 +84,7 @@
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    onclick="Confirm('{{ $category->idCategoriaProducto }}')"
+                                                    onclick="Confirm('{{ $almacen->idAlmacen }}')"
                                                     data-toggle="tooltip" data-placement="top" title=""
                                                     data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -92,30 +105,32 @@
                             @endforeach
                         @else
                             <tr>
-                                <td class="text-center" colspan="4"> No se encontraron similitudes</td>
+                                <td class="text-center" colspan="6"> No se encontraron similitudes</td>
                             </tr>
                         @endif
                     </tbody>
                 </table>
             </div>
             <div>
-                {{ $categories->links() }}
+                {{ $almacenes->links() }}
             </div>
         </div>
 
-        @include('Livewire.Categorias.form')
+        @include('Livewire.Almacen.form')
     </div>
 </div>
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         window.livewire.on('show-modal', msg => {
-            $('#categoryModal').modal('show');
+            $('#AlmacenModal').modal('show');
         });
-        window.livewire.on('category-added', msg => {
-            $('#categoryModal').modal('hide');
+        window.livewire.on('almacen-added', msg => {
+            $('#AlmacenModal').modal('hide');
         });
-        window.livewire.on('category-updated', msg => {
-            $('#categoryModal').modal('hide');
+        window.livewire.on('almacen-updated', msg => {
+            $('#AlmacenModal').modal('hide');
         });
     });
 
@@ -131,7 +146,7 @@
             cancelButtonColor: '#fff',
         }).then(function(result) {
             if (result.value) {
-                window.livewire.emit('deleteRow',id);
+                window.livewire.emit('deleteRow', id);
                 swal(
                     'Eliminado!',
                     'El registro ha sido eliminado.',

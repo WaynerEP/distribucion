@@ -62,55 +62,10 @@
                         <a href="categories"> Categorias </a>
                     </li>
                     <li>
-                        <a href="element_avatar.html"> Avatar </a>
+                        <a href="almacenes"> Almacenes </a>
                     </li>
                     <li>
-                        <a href="element_badges.html"> Badges </a>
-                    </li>
-                    <li>
-                        <a href="element_breadcrumbs.html"> Breadcrumbs </a>
-                    </li>
-                    <li>
-                        <a href="element_buttons.html"> Buttons </a>
-                    </li>
-                    <li>
-                        <a href="element_buttons_group.html"> Button Groups </a>
-                    </li>
-                    <li>
-                        <a href="element_color_library.html"> Color Library </a>
-                    </li>
-                    <li>
-                        <a href="element_dropdown.html"> Dropdown </a>
-                    </li>
-                    <li>
-                        <a href="element_infobox.html"> Infobox </a>
-                    </li>
-                    <li>
-                        <a href="element_jumbotron.html"> Jumbotron </a>
-                    </li>
-                    <li>
-                        <a href="element_loader.html"> Loader </a>
-                    </li>
-                    <li>
-                        <a href="element_pagination.html"> Pagination </a>
-                    </li>
-                    <li>
-                        <a href="element_popovers.html"> Popovers </a>
-                    </li>
-                    <li>
-                        <a href="element_progress_bar.html"> Progress Bar </a>
-                    </li>
-                    <li>
-                        <a href="element_search.html"> Search </a>
-                    </li>
-                    <li>
-                        <a href="element_tooltips.html"> Tooltips </a>
-                    </li>
-                    <li>
-                        <a href="element_treeview.html"> Treeview </a>
-                    </li>
-                    <li>
-                        <a href="element_typography.html"> Typography </a>
+                        <a href="products"> Productos </a>
                     </li>
                 </ul>
             </li>

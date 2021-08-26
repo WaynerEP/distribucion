@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\categoriaController;
+use App\Http\Livewire\almacenController;
+use App\Http\Livewire\productoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/categories', categoriaController::class)->name('categories')->middleware('auth');
+
+Route::get('/almacenes', almacenController::class)->name('almacenes')->middleware('auth');
+
+Route::get('/products', productoController::class)->name('products')->middleware('auth');

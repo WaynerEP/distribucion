@@ -9,8 +9,11 @@
         App.init();
     });
 </script>
-<script src="plugins/highlight/highlight.pack.js"></script>
+{{-- <script src="plugins/highlight/highlight.pack.js"></script> --}}
 <script src="assets/js/custom.js"></script>
-<script src="assets/js/elements/tooltip.js"></script>
-<script src="assets/js/scrollspyNav.js"></script>
-<script src="assets/js/components/notification/custom-snackbar.js"></script>
+{{-- <script src="assets/js/scrollspyNav.js"></script> --}}
+{{-- <script src="assets/js/components/notification/custom-snackbar.js"></script> --}}
+<script src="plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="plugins/sweetalerts/custom-sweetalert.js"></script>
+@yield('scripts')
+

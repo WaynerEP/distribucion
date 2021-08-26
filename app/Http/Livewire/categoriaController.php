@@ -14,7 +14,7 @@ class categoriaController extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $selected_id, $nombre, $search, $title;
-    private $pagination = 7;
+    private $pagination = 10;
 
 
     public function render()
@@ -77,7 +77,20 @@ class categoriaController extends Component
         $category->Update([
             'nombre' => $this->nombre
         ]);
+        $this->resetUI();
+        $this->emit('category-updated', 'Categoría Actualizada');
     }
+
+
+    protected $listeners = ['deleteRow' => 'destroy'];
+
+    public function destroy(Categoria $category)
+    {
+        $category->delete();
+        $this->resetUI();
+        $this->emit('category-destroyed', 'Categoría Eliminada');
+    }
+
 
     public function resetUI()
     {
