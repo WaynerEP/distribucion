@@ -10,37 +10,45 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/pages/login/classic/login-5.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/switches.css') }}">
 
 </head>
 
-<body>
-    <div class="d-flex flex-column flex-root">
-        <div class="login login-5 login-signin-on d-flex flex-row-fluid">
-            <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid"
-                style="background-image: url(/assets/media/bg/bg-2.jpg);">
-                <div class="login-form text-center text-white p-7 position-relative overflow-hidden">
-                    <div class="d-flex flex-center mb-15">
-                        <a href="/">
-                            <img src="{{ asset('assets/media/logos/logo-letter-13.png') }}" class="max-h-75px"
-                                alt="" />
-                        </a>
-                    </div>
-                    <div class="login-signin">
+<body class="form">
+    <div class="form-container">
+        <div class="form-form">
+            <div class="form-form-wrap">
+                <div class="form-container">
+                    <div class="form-content">
                         @yield('main')
-                        <div class="mt-10">
-                            <span class="opacity-40 mr-4">Am'u Distribuciones S.A | © Copyright 2021</span>
-                        </div>
+                        <p class="terms-conditions">© 2021 || Todos los derechos reservados. 
+                            <a href="#">A'MU</a> Distribuciones S.A.C.
+                
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="form-image">
+            <div class="l-image">
+            </div>
+        </div>
     </div>
+
+    <script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/authentication/form-1.js') }}"></script>
 </body>
 
 </html>

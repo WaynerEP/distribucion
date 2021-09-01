@@ -6,7 +6,7 @@ use App\Models\Categoria;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use DB;
 class categoriaController extends Component
 {
     use WithPagination;
@@ -14,12 +14,12 @@ class categoriaController extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $selected_id, $nombre, $search, $title;
-    private $pagination = 10;
+    private $pagination = 5;
 
 
     public function render()
     {
-        $data = Categoria::where('nombre', 'LIKE', "%$this->search%")->orderBy('idCategoriaProducto', 'desc')->paginate($this->pagination);
+        $data = DB::table('categoriaProducto')->where('nombre', 'LIKE', "%$this->search%")->orderBy('idCategoriaProducto', 'desc')->simplePaginate($this->pagination);
         return view('livewire.Categorias.index', ['categories' => $data])
             ->extends('layouts.app')
             ->section('content');
@@ -51,7 +51,7 @@ class categoriaController extends Component
                 'nombre.unique' => 'Ya existe el nombre de la categoria',
             ]
         );
-        $category = Categoria::create([
+        Categoria::create([
             'nombre' => $this->nombre,
         ]);
         $this->resetUI();
