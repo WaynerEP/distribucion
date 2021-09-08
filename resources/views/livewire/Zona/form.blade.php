@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="AlmacenModal" tabindex="-1" role="dialog"
+<div wire:ignore.self class="modal fade" id="zonaModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ $title ? 'Editar Almacén' : 'Nuevo Almacén' }}
+                <h5 class="modal-title" id="exampleModalLabel">{{ $title ? 'Editar Zona' : 'Nueva Zona' }}
                 </h5>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -18,41 +18,26 @@
             </div>
             <div class="modal-body">
                 <div class="form-row mb-4">
-                    <div class="form-group col-md-4">
-                        <label for="code">Código</label>
-                        <input wire:model="codigo" type="text" class="form-control form-control-sm" id="code"
-                            placeholder="Código" readonly>
-                        @error('codigo')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-8">
-                        <label for="description">Descripción</label>
-                        <input wire:model="nombre" type="text" class="form-control form-control-sm" id="description"
-                            placeholder="Nombre">
+                    <div class="form-group col-md-6">
+                        <label for="nombre">Descripción</label>
+                        <input wire:model.defer="nombre" type="text" class="form-control form-control-sm" id="nombre"
+                            placeholder="Ingrese zona">
                         @error('nombre')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                </div>
-                <div class="form-group mb-4">
-                    <label for="address">Dirección</label>
-                    <textarea wire:model="direccion" class="form-control form-control-sm" id="address"
-                        placeholder="1234 Main St" rows="2"></textarea>
-                    @error('direccion')
-                        <div class="invalid-feedback d-block" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group mb-4">
-                    <label for="reference">Referencia</label>
-                    <textarea wire:model="referencia" class="form-control form-control-sm" id="reference"
-                        placeholder="Apartment, studio, or floor" rows="2"></textarea>
+                    <div class="form-group col-md-6">
+                        <label for="fRegistro">Fecha</label>
+                        <input wire:model.defer="fRegistro" id="basicFlatpickr" class="form-control flatpickr flatpickr-input"
+                            type="text" placeholder="YYYY-MM-DD" readonly="readonly">
+                        @error('fRegistro')
+                            <div class="invalid-feedback d-block" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-row mb-4">
                     <div class="form-group col-md-4">
@@ -66,7 +51,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="provincia">Provincias</label>
-                        <select wire:model="SelectedProv" id="provincia" class="form-control form-control-sm">
+                        <select wire:model="SelectedProv" id="provincia" class="form-control form-control-sm" {{ $provincias?'':'disabled' }}>
                             <option value="">Seleccione...</option>
                             @if (!is_null($provincias))
                                 @foreach ($provincias as $prov)
@@ -77,7 +62,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="dist">Distritos</label>
-                        <select wire:model="SelectedDist" id="dist" class="form-control form-control-sm">
+                        <select wire:model="SelectedDist" id="dist" class="form-control form-control-sm" {{ $distritos?'':'disabled' }}>
                             <option value="">Seleccione...</option>
                             @if (!is_null($distritos))
                                 @foreach ($distritos as $dist)

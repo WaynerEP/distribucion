@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use Livewire\Component;
 use Livewire\WithPagination;
 use DB;
+
 class categoriaController extends Component
 {
     use WithPagination;
@@ -14,12 +15,12 @@ class categoriaController extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $selected_id, $nombre, $search, $title;
-    private $pagination = 5;
+    private $pagination = 8;
 
 
     public function render()
     {
-        $data = DB::table('categoriaProducto')->where('nombre', 'LIKE', "%$this->search%")->orderBy('idCategoriaProducto', 'desc')->simplePaginate($this->pagination);
+        $data = DB::table('categoriaProducto')->where('nombre', 'LIKE', "%$this->search%")->orderBy('idCategoriaProducto', 'desc')->paginate($this->pagination);
         return view('livewire.Categorias.index', ['categories' => $data])
             ->extends('layouts.app')
             ->section('content');
@@ -55,7 +56,7 @@ class categoriaController extends Component
             'nombre' => $this->nombre,
         ]);
         $this->resetUI();
-        $this->emit('category-added', 'Categoría Registrada');
+        $this->emit('category-added', 'Categoría Registrada!');
     }
 
 
@@ -78,7 +79,7 @@ class categoriaController extends Component
             'nombre' => $this->nombre
         ]);
         $this->resetUI();
-        $this->emit('category-updated', 'Categoría Actualizada');
+        $this->emit('category-updated', 'Categoría Actualizada!');
     }
 
 
@@ -88,15 +89,14 @@ class categoriaController extends Component
     {
         $category->delete();
         $this->resetUI();
-        $this->emit('category-destroyed', 'Categoría Eliminada');
+        $this->emit('category-destroyed', 'Categoría Eliminada!');
     }
 
 
     public function resetUI()
     {
-        $this->nombre = '';
-        $this->title = false;
-        $this->search = '';
-        $this->selected_id = 0;
+        $this->reset('nombre', 'title', 'search', 'selected_id');
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 }

@@ -67,6 +67,18 @@
                     <li>
                         <a href="products"> Productos </a>
                     </li>
+                    <li>
+                        <a href="clientes"> Clientes </a>
+                    </li>
+                    <li>
+                        <a href="zonas"> Zonas </a>
+                    </li>
+                    <li>
+                        <a href="ciudadanos"> Ciudadanos </a>
+                    </li>
+                    <li>
+                        <a href="transporte"> Transporte </a>
+                    </li>
                 </ul>
             </li>
 

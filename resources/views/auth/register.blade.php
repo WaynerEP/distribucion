@@ -3,9 +3,9 @@
 @section('main')
     <h1 class="">Registro!</h1>
     <p class="signup-link">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
-    <form class="text-left">
+    <form class="text-left" method="POST" action="{{ route('register') }}"">
+        @csrf
         <div class="form">
-
             <div id="username-field" class="field-wrapper input">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

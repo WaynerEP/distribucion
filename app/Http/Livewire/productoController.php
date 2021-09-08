@@ -18,14 +18,15 @@ class productoController extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $selected_id, $codigo, $image, $nombre, $cantidad, $precio, $idAlmacen, $idCategoriaProducto, $title, $search, $photoProduct;
-    private $pagination = 20;
+    public $selected_id, $codigo, $image, $nombre, $cantidad, $precio, $idAlmacen, $idCategoriaProducto, $title, $search,$filter, $photoProduct;
+    private $pagination = 8 ;
 
     public function render()
     {
         $data = DB::table('producto as p')->join('categoriaProducto as cp', 'p.idCategoriaProducto', '=', 'cp.idCategoriaProducto')
-            ->select('p.idProducto', 'p.nombre', 'p.cantidad', 'p.image', 'p.precio', 'cp.nombre as categoria')
+            ->select('p.idProducto', 'p.nombre', 'p.cantidad', 'p.precio', 'cp.nombre as categoria')
             ->where('p.nombre', 'LIKE', "%$this->search%")
+            ->where('p.idCategoriaProducto','LIKE', "%$this->filter%")
             ->orderBy('p.idProducto', 'desc')
             ->paginate($this->pagination);
 
@@ -39,8 +40,7 @@ class productoController extends Component
     {
         $this->validate(
             [
-                'codigo' => 'required|max:6|min:3|unique:producto',
-                'nombre' => 'required|max:50|min:3|unique:producto',
+                'nombre' => 'required|max:80|min:3|unique:producto',
                 'cantidad' => 'required|numeric|min:0|not_in:0',
                 'precio' => 'required|numeric|min:0|not_in:0',
                 'idCategoriaProducto' => 'required',
@@ -48,9 +48,6 @@ class productoController extends Component
                 'image' => 'image|max:1024',
             ],
             [
-                'codigo.required' => 'El código es obligatorio',
-                'codigo.unique' => 'Ya existe el código de producto',
-                'codigo.max' => 'El código debe contener como máximo 10 caracteres',
                 'nombre.required' => 'El nombre del producto es obligatorio',
                 'nombre.max' => 'El producto debe contener como maximo 50 caracteres',
                 'nombre.min' => 'El producto debe contener al menos 3 caracteres',
@@ -70,7 +67,6 @@ class productoController extends Component
             ]
         );
         $producto = Producto::create([
-            'codigo' => $this->codigo,
             'nombre' => strtoupper($this->nombre),
             'cantidad' => $this->cantidad,
             'precio' => $this->precio,
@@ -78,16 +74,16 @@ class productoController extends Component
             'idCategoriaProducto' => $this->idCategoriaProducto,
         ]);
 
-        if ($this->image) {
-            $customFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/products', $customFileName);
+        // if ($this->image) {
+        //     $customFileName = uniqid() . '_.' . $this->image->extension();
+        //     $this->image->storeAs('public/products', $customFileName);
 
-            $producto->image = $customFileName;
-            $producto->save();
-        }
+        //     $producto->image = $customFileName;
+        //     $producto->save();
+        // }
 
         $this->resetUI();
-        $this->emit('product-added', 'Almacén Registrado');
+        $this->emit('product-added', 'Producto Registrado');
     }
 
 
@@ -113,17 +109,13 @@ class productoController extends Component
     {
         $this->validate(
             [
-                'codigo' => 'required|max:6|min:3|unique:producto,codigo,' . $this->selected_id . ',idProducto',
-                'nombre' => 'required|max:50|min:3|unique:producto,nombre,' . $this->selected_id . ',idProducto',
+                'nombre' => 'required|max:80|min:3|unique:producto,nombre,' . $this->selected_id . ',idProducto',
                 'cantidad' => 'required|numeric|min:0|not_in:0',
                 'precio' => 'required|numeric|min:0|not_in:0',
                 'idCategoriaProducto' => 'required',
                 'idAlmacen' => 'required',
             ],
             [
-                'codigo.required' => 'El código es obligatorio',
-                'codigo.unique' => 'Ya existe el código de producto',
-                'codigo.max' => 'El código debe contener como máximo 10 caracteres',
                 'nombre.required' => 'El nombre del producto es obligatorio',
                 'nombre.max' => 'El producto debe contener como maximo 50 caracteres',
                 'nombre.min' => 'El producto debe contener al menos 3 caracteres',
@@ -152,22 +144,22 @@ class productoController extends Component
             'idCategoriaProducto' => $this->idCategoriaProducto,
         ]);
 
-        if ($this->image) {
-            $customFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/products', $customFileName);
-            $imageName = $customFileName;
+        // if ($this->image) {
+        //     $customFileName = uniqid() . '_.' . $this->image->extension();
+        //     $this->image->storeAs('public/products', $customFileName);
+        //     $imageName = $customFileName;
 
-            $producto->image = $customFileName;
-            $producto->save();
-            if ($imageName != null) {
-                if (file_exists('storage/products' . $imageName)) {
-                    unlink('storage/products' . $imageName);
-                }
-            }
-        }
+        //     $producto->image = $customFileName;
+        //     $producto->save();
+        //     if ($imageName != null) {
+        //         if (file_exists('storage/products' . $imageName)) {
+        //             unlink('storage/products' . $imageName);
+        //         }
+        //     }
+        // }
 
         $this->resetUI();
-        $this->emit('product-updated', 'Almacén Actualizado');
+        $this->emit('product-updated', 'Producto Actualizado!');
     }
 
 
@@ -188,16 +180,8 @@ class productoController extends Component
 
     public function resetUI()
     {
-        $this->codigo = '';
-        $this->nombre = '';
-        $this->cantidad = '';
-        $this->precio = '';
-        $this->idAlmacen = '';
-        $this->idCategoriaProducto = '';
-        $this->image = '';
-        $this->photoProduct = '';
-
-        $this->title = false;
-        $this->selected_id = 0;
+        $this->reset('codigo','nombre','cantidad','precio','idAlmacen','idCategoriaProducto','image','photoProduct','title','selected_id');
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 }

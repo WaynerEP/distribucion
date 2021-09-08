@@ -122,7 +122,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="modal-text">Mauris mi tellus, pharetra vel mattis sed, tempus ultrices eros. Phasellus egestas
+                    <p class="modal-text">Mauris mi tellus, pharetra vel mattis sed, tempus ultrices eros. Phasellus
+                        egestas
                         sit amet velit sed luctus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
                         ridiculus mus. Suspendisse potenti. Vivamus ultrices sed urna ac pulvinar. Ut sit amet ullamcorper
                         mi. </p>
@@ -134,4 +135,20 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        window.onload = showMessage();
+
+        function showMessage() {
+            Snackbar.show({
+                text: 'Bienvenido al Sistema!',
+                pos: 'bottom-right',
+                actionText: 'Cerrar',
+                actionTextColor: '#fff',
+                backgroundColor: '#4361ee'
+            });
+        }
+    </script>
 @endsection

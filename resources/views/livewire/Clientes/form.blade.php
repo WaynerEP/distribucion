@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="AlmacenModal" tabindex="-1" role="dialog"
+<div wire:ignore.self class="modal fade" id="clienteModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ $title ? 'Editar Almacén' : 'Nuevo Almacén' }}
+                <h5 class="modal-title" id="exampleModalLabel">{{ $title ? 'Editar Cliente' : 'Nuevo Cliente' }}
                 </h5>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -19,40 +19,15 @@
             <div class="modal-body">
                 <div class="form-row mb-4">
                     <div class="form-group col-md-4">
-                        <label for="code">Código</label>
-                        <input wire:model="codigo" type="text" class="form-control form-control-sm" id="code"
-                            placeholder="Código" readonly>
-                        @error('codigo')
+                        <label for="dni">DNI</label>
+                        <input wire:model="dni" type="text" class="form-control form-control-sm" id="dni"
+                            placeholder="Ingrese dni">
+                        @error('dni')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-8">
-                        <label for="description">Descripción</label>
-                        <input wire:model="nombre" type="text" class="form-control form-control-sm" id="description"
-                            placeholder="Nombre">
-                        @error('nombre')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group mb-4">
-                    <label for="address">Dirección</label>
-                    <textarea wire:model="direccion" class="form-control form-control-sm" id="address"
-                        placeholder="1234 Main St" rows="2"></textarea>
-                    @error('direccion')
-                        <div class="invalid-feedback d-block" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group mb-4">
-                    <label for="reference">Referencia</label>
-                    <textarea wire:model="referencia" class="form-control form-control-sm" id="reference"
-                        placeholder="Apartment, studio, or floor" rows="2"></textarea>
                 </div>
                 <div class="form-row mb-4">
                     <div class="form-group col-md-4">

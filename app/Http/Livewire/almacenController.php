@@ -6,7 +6,7 @@ use App\Models\Almacen;
 use App\Models\Departamento;
 use App\Models\Provincia;
 use App\Models\Distrito;
-
+use DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,12 +19,12 @@ class almacenController extends Component
     public $SelectedDepa = null, $SelectedProv = null, $SelectedDist = null;
     public $provincias = null, $distritos = null;
     public $selected_id, $codigo, $nombre, $direccion, $referencia, $search, $title;
-    private $pagination = 10;
+    private $pagination = 8;
 
 
     public function render()
     {
-        $data = Almacen::where('nombre', 'LIKE', "%$this->search%")->orderBy('idAlmacen', 'desc')->paginate($this->pagination);
+        $data = DB::table('almacen')->where('nombre', 'LIKE', "%$this->search%")->orderBy('idAlmacen', 'desc')->simplePaginate($this->pagination);
         return view('livewire.Almacen.index', ['almacenes' => $data, 'departamentos' => Departamento::all()])
             ->extends('layouts.app')
             ->section('content');
@@ -33,14 +33,14 @@ class almacenController extends Component
     public function updatedSelectedDepa($id)
     {
 
-        $this->provincias = Provincia::where('idDepa', $id)->get();
-        $this->distritos = null;
+        $this->provincias = Provincia::select('idProvincia', 'provincia')->where('idDepa', $id)->get();
+        $this->reset('distritos');
     }
 
 
     public function updatedSelectedProv($id)
     {
-        $this->distritos = Distrito::where('idProvincia', $id)->get();
+        $this->distritos = Distrito::select('idDistrito', 'distrito')->where('idProvincia', $id)->get();
     }
 
 
@@ -63,15 +63,11 @@ class almacenController extends Component
     {
         $this->validate(
             [
-                'codigo' => 'required|max:6|min:3|unique:almacen',
                 'nombre' => 'required|max:50|min:3|unique:almacen',
                 'direccion' => 'required|max:150|min:3',
                 'SelectedDist' => 'required',
             ],
             [
-                'codigo.required' => 'El código es obligatorio',
-                'codigo.unique' => 'Ya existe el código del Almacén',
-                'codigo.max' => 'El ´código debe contener como máximo 6 caracteres',
                 'nombre.required' => 'El nombre del almacen es obligatorio',
                 'nombre.max' => 'El almacen debe contener como maximo 50 caracteres',
                 'nombre.min' => 'El almacen debe contener al menos 3 caracteres',
@@ -83,14 +79,13 @@ class almacenController extends Component
             ]
         );
         Almacen::create([
-            'codigo' => $this->codigo,
             'nombre' => $this->nombre,
             'direccion' => $this->direccion,
             'referencia' => $this->referencia,
             'idDistrito' => $this->SelectedDist,
         ]);
         $this->resetUI();
-        $this->emit('almacen-added', 'Almacén Registrado');
+        $this->emit('almacen-added', 'Almacén Registrado!');
     }
 
 
@@ -127,7 +122,7 @@ class almacenController extends Component
             'idDistrito' => $this->SelectedDist,
         ]);
         $this->resetUI();
-        $this->emit('almacen-updated', 'Almacen Actualizado');
+        $this->emit('almacen-updated', 'Almacen Actualizado!');
     }
 
 
@@ -143,15 +138,8 @@ class almacenController extends Component
 
     public function resetUI()
     {
-        $this->codigo = '';
-        $this->nombre = '';
-        $this->direccion = '';
-        $this->referencia = '';
-        $this->SelectedDepa = '';
-        $this->SelectedProv = '';
-        $this->SelectedDist = '';
-        $this->title = false;
-        $this->search = '';
-        $this->selected_id = 0;
+        $this->reset('codigo', 'nombre', 'direccion', 'referencia', 'SelectedDepa', 'SelectedProv', 'SelectedDist', 'title', 'search', 'selected_id');
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 }

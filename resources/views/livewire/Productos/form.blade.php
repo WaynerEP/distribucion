@@ -21,12 +21,7 @@
                     <div class="form-group col-md-3">
                         <label for="code">Código</label>
                         <input wire:model.defer="codigo" type="text" class="form-control form-control-sm" id="code"
-                            placeholder="Código">
-                        @error('codigo')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                            placeholder="Código" disabled>
                     </div>
                     <div class="form-group col-md-9">
                         <label for="description">Descripción</label>
@@ -115,7 +110,8 @@
                                     <p>Click to Upload Picture</p>
                                 </div>
                                 <div wire:loading wire:target="image" class="dropify-loader"></div>
-                                <input type="file" wire:model.defer="image" class="dropify" data-max-file-size="2M">
+                                <input type="file" wire:model.defer="image" class="dropify"
+                                    data-max-file-size="2M" accept="image/png, .jpeg, .jpg, image/gif">
                                 @if ($image || $photoProduct)
                                     <div class="dropify-preview" style="display: block;">
                                         <span class="dropify-render">
@@ -127,12 +123,6 @@
                                         </span>
                                         <div class="dropify-infos">
                                             <div class="dropify-infos-inner">
-                                                <p class="dropify-filename">
-                                                    <span class="file-icon"></span>
-                                                    <span class="dropify-filename-inner">
-                                                        image.jpg
-                                                    </span>
-                                                </p>
                                                 <p class="dropify-infos-message">Upload or Drag, Drop</p>
                                             </div>
                                         </div>
@@ -144,24 +134,16 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn" wire:click="resetUI" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                    Cancelar</button>
+                <button class="btn" wire:click="resetUI" data-dismiss="modal">
+                    Cancelar
+                </button>
                 @if ($title)
-                    <button type="button" wire:click="Update()" class="btn btn-info flex align-items-center">
-                        <svg wire:loading wire:target="Update" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin mr-2">
-                            <line x1="12" y1="2" x2="12" y2="6"></line>
-                            <line x1="12" y1="18" x2="12" y2="22"></line>
-                            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                            <line x1="2" y1="12" x2="6" y2="12"></line>
-                            <line x1="18" y1="12" x2="22" y2="12"></line>
-                            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-                            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-                        </svg> Actualizar</button>
+                    <button type="button" wire:click="Update()" class="btn btn-info">
+                        <span wire:loading wire:target="Update"
+                            class="spinner-border text-white mr-2 align-self-center loader-sm ">Loading...</span>
+                        Actualizar</button>
                 @else
-                    <button type="button" wire:click="Store" class="btn btn-primary">
+                    <button type="button" wire:click="Store()" class="btn btn-primary">
                         <svg wire:loading wire:target="Store" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin mr-2">
@@ -173,7 +155,7 @@
                             <line x1="18" y1="12" x2="22" y2="12"></line>
                             <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
                             <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-                        </svg> <span class="my-auto"> Guardar</span></button>
+                        </svg> Guardar</button>
                 @endif
             </div>
         </div>
