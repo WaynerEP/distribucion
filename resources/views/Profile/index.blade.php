@@ -1,7 +1,7 @@
 @extends('Layouts.app')
 
 @section('styles')
-    <link href="assets/css/users/user-profile.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('titlePage')
     <h3>Perfil</h3>
@@ -14,7 +14,7 @@
                 <div class="widget-content widget-content-area">
                     <div class="d-flex justify-content-between">
                         <h3 class="">Información</h3>
-                        <a href=" edit_profile"
+                        <a href="{{ route('edit_profile') }}"
                             class="mt-2 edit-profile">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -24,7 +24,12 @@
                             </svg></a>
                     </div>
                     <div class="text-center user-info">
-                        <img src="assets/img/90x90.jpg" alt="avatar">
+                        @if (Auth()->user()->photo_profile)
+                            <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}"
+                                alt="{{ Auth()->user()->name }}">
+                        @else
+                            <img src="assets/img/90x90.jpg" alt="{{ Auth()->user()->name }}">
+                        @endif
                         <p class="">{{ auth()->user()->name }}</p>
                     </div>
                     <div class="
@@ -103,5 +108,9 @@
     </div>
 @endsection
 @section('scripts')
-<script src="plugins/dropify/dropify.min.js"></script>
+    <script>
+        window.addEventListener('password_updated', event => {
+            showMessage(event.detail.message);
+        })
+    </script>
 @endsection

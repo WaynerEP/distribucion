@@ -9,6 +9,7 @@ use App\Models\Departamento;
 use App\Models\Provincia;
 use App\Models\Distrito;
 use DB;
+
 class clienteController extends Component
 {
 
@@ -24,11 +25,15 @@ class clienteController extends Component
 
     public function render()
     {
-        $data = DB::table('cliente')->where('dni', 'LIKE', "%$this->search%")->orderBy('idCliente', 'desc')->simplePaginate($this->pagination);
+        $data = DB::table('cliente as l')
+            ->join('ciudadano as c', 'l.dni', '=', 'c.dni')
+            ->select('l.idCliente', 'c.nombre', 'c.aPaterno', 'c.aMaterno', 'c.email','c.direccion','l.estado')
+            ->where('l.dni', 'LIKE', "%$this->search%")
+            ->orderBy('l.idCliente', 'desc')->simplePaginate($this->pagination);
 
         return view('livewire.Clientes.index', ['clientes' => $data, 'departamentos' => Departamento::all()])
             ->extends('layouts.app')
-            ->section('content');;
+            ->section('content');
     }
 
 
@@ -46,29 +51,28 @@ class clienteController extends Component
     }
 
 
-    
-    public function Edit(){
 
+    public function Edit()
+    {
     }
 
 
 
-    public function Store(){
-
+    public function Store()
+    {
     }
 
 
 
-    public function Update(){
-
-
+    public function Update()
+    {
     }
 
 
 
     public function resetUI()
     {
-        $this->reset('dni', 'fIngreso','SelectedDepa', 'SelectedProv', 'SelectedDist', 'title', 'search', 'selected_id');
+        $this->reset('dni', 'fIngreso', 'SelectedDepa', 'SelectedProv', 'SelectedDist', 'title', 'search', 'selected_id');
         $this->resetErrorBag();
         $this->resetValidation();
     }

@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
+                    {{--  <div class="widget-header">
                         <div class="row px-3 pt-3">
                             <div class="col-12">
                                 <div class="form-group row mb-4">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  --}}
                     <div class="widget-content widget-content-area">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-4">
@@ -92,19 +92,23 @@
                                             <tr>
                                                 <td class="text-primary">{{ $product->idProducto }}</td>
                                                 <td>
-                                                    {{-- <div class="d-flex">
-                                                    <div class="avatar avatar-sm mr-2">
-                                                        <img alt="{{ $product->nombre }}" loading="lazy"
-                                                            class="rounded"
-                                                            src="{{ asset('storage/products/' . $product->image) }}">
+                                                    <div class="d-flex">
+                                                        <div class="avatar avatar-sm mr-2">
+                                                            @if ($product->image)
+                                                                <img alt="{{ $product->nombre }}" loading="lazy"
+                                                                    class="rounded"
+                                                                    src="{{ asset('storage/products/' . $product->image) }}">
+                                                            @else
+                                                                <img src="{{ asset('assets/img/90x90.jpg') }}"
+                                                                    class="profile-img" alt="image" loading="lazy">
+                                                            @endif
+                                                        </div>
+                                                        <p class="align-self-center mb-0">{{ $product->nombre }}</p>
                                                     </div>
-                                                    <p class="align-self-center mb-0">{{ $product->nombre }}</p>
-                                                </div> --}}
-                                                    {{ $product->nombre }}
                                                 </td>
                                                 <td>{{ $product->categoria }}</td>
                                                 <td>{{ $product->cantidad }}</td>
-                                                <td>S/. {{ $product->precio }}</td>
+                                                <td>S/. {{ number_format($product->precio,2) }}</td>
                                                 <td class=" text-center">
                                                     <ul class="table-controls">
                                                         <li><a wire:click="Edit('{{ $product->idProducto }}')"

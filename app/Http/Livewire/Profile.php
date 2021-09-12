@@ -3,16 +3,20 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+
+use Carbon\Carbon;
 use Hash;
 
-class Profile extends Component
+use App\Models\UserMetaData;
+
+class profile extends Component
 {
 
     public $current_password, $new_password, $confirm_password;
 
     public function render()
     {
-        return view('livewire.profile');
+        return view('livewire.Profile.profile');
     }
 
 
@@ -29,15 +33,33 @@ class Profile extends Component
             $user->forceFill([
                 'password' => Hash::make($this->new_password),
             ])->save();
+            $date = Carbon::now();
+            UserMetaData::create([
+                'clave' => 'password_change',
+                'valor' => Hash::make($this->current_password),
+                'tipo' => 'password_updated',
+                'fecha' => $date,
+                'idUsuario' => $user->idUsuario,
+            ]);
+            $this->resetUI();
+            $this->success();
         } else {
             $this->addError('current_password', __('La contraseña proporcionada no coincide con su contraseña actual.'));
         }
     }
 
 
-    public function resetUI(){
-        $this->reset('current_password','new_password','confirm_password');
+    public function resetUI()
+    {
+        $this->reset('current_password', 'new_password', 'confirm_password');
         $this->resetErrorBag();
         $this->resetValidation();
+    }
+
+    public function success()
+    {
+        $this->dispatchBrowserEvent('password_updated', [
+            'message' => 'Contraseña actualizada!'
+        ]);
     }
 }

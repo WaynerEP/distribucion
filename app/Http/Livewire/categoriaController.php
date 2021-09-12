@@ -15,7 +15,7 @@ class categoriaController extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $selected_id, $nombre, $search, $title;
-    private $pagination = 8;
+    public $pagination = 8;
 
 
     public function render()

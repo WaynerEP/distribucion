@@ -38,19 +38,22 @@
             <li class="nav-item dropdown language-dropdown more-dropdown">
                 <div class="dropdown  custom-dropdown-icon">
                     <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img src="assets/img/flag-ca.svg" class="flag-width"
-                            alt="flag"><span>English</span> <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                        aria-haspopup="true" aria-expanded="false"><img src="{{ asset('/assets/img/flag-ca.svg') }}"
+                            class="flag-width" alt="flag"><span>English</span> <svg
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevron-down">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg></a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="customDropdown">
                         <a class="dropdown-item" data-img-value="flag-sp" data-value="Spanish"
-                            href="javascript:void(0);"><img src="assets/img/flag-sp.svg" class="flag-width" alt="flag">
+                            href="javascript:void(0);"><img src="{{ asset('assets/img/flag-sp.svg') }}"
+                                class="flag-width" alt="flag">
                             Spanish</a>
                         <a class="dropdown-item" data-img-value="flag-ca" data-value="English"
-                            href="javascript:void(0);"><img src="assets/img/flag-ca.svg" class="flag-width" alt="flag">
+                            href="javascript:void(0);"><img src="{{ asset('assets/img/flag-ca.svg') }}"
+                                class="flag-width" alt="flag">
                             English</a>
                     </div>
                 </div>
@@ -69,117 +72,126 @@
                 </a>
                 <div class="dropdown-menu p-0 position-absolute" aria-labelledby="messageDropdown">
                     <div class="">
-                        <a class="dropdown-item">
-                            <div class="">
+                        <a class=" dropdown-item">
+                        <div class="">
 
-                                <div class="media">
-                                    <div class="user-img">
-                                        <div class="avatar avatar-xl">
-                                            <span class="avatar-title rounded-circle">KY</span>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="">
-                                            <h5 class="usr-name">Kara Young</h5>
-                                            <p class="msg-title">ACCOUNT UPDATE</p>
-                                        </div>
-                                    </div>
+                                <div class=" media">
+                            <div class="user-img">
+                                <div class="avatar avatar-xl">
+                                    <span class="avatar-title rounded-circle">KY</span>
                                 </div>
-
                             </div>
-                        </a>
+                            <div class="media-body">
+                                <div class="">
+                                            <h5 class=" usr-name">Kara
+                                    Young</h5>
+                                    <p class="msg-title">ACCOUNT UPDATE</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+                    </a>
                 </div>
+            </div>
             </li>
 
-            <li class="nav-item dropdown notification-dropdown">
-                <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<li class="nav-item dropdown notification-dropdown">
+    <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-bell">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg><span class="badge badge-success"></span>
+    </a>
+    <div class="dropdown-menu position-absolute" aria-labelledby="notificationDropdown">
+        <div class="notification-scroll">
+
+            <div class="dropdown-item">
+                <div class="media server-log">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-bell">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                    </svg><span class="badge badge-success"></span>
-                </a>
-                <div class="dropdown-menu position-absolute" aria-labelledby="notificationDropdown">
-                    <div class="notification-scroll">
-
-                        <div class="dropdown-item">
-                            <div class="media server-log">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-server">
-                                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                                    <line x1="6" y1="6" x2="6" y2="6"></line>
-                                    <line x1="6" y1="18" x2="6" y2="18"></line>
-                                </svg>
-                                <div class="media-body">
-                                    <div class="data-info">
-                                        <h6 class="">Server Rebooted</h6>
+                        class="feather feather-server">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                        <line x1="6" y1="6" x2="6" y2="6"></line>
+                        <line x1="6" y1="18" x2="6" y2="18"></line>
+                    </svg>
+                    <div class="media-body">
+                        <div class="data-info">
+                            <h6 class="">Server Rebooted</h6>
                                         <p class="">45 min ago</p>
                                     </div>
 
-                                    <div class="icon-status">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                                    <div class="      icon-status">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-x">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
                         </div>
                     </div>
                 </div>
-            </li>
+            </div>
+        </div>
+    </div>
+</li>
 
-            <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
-                <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="assets/img/90x90.jpg" alt="avatar" class="bs-tooltip" data-original-title="{{ Auth::user()->name }}">
-                    {{--  <img src="assets/img/90x90.jpg" alt="avatar" class="bs-tooltip" data-original-title="{{ Auth::user()->name }}">  --}}
-                </a>
-                <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                    <div class="user-profile-section">
-                        <div class="media mx-auto">
-                            <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="avatar">
-                            <div class="media-body">
-                                <h5>{{ Auth()->user()->name }}</h5>
-                                <p>Administrador</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="user_profile">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-user">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg> <span> Perfil</span>
-                        </a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-log-out">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <polyline points="16 17 21 12 16 7"></polyline>
-                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg> <span>{{ __('Cerrar Sesión') }}</span>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
+<li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        @if (Auth()->user()->photo_profile)
+            <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}"
+                alt="{{ Auth()->user()->name }}">
+        @else
+            <img src="assets/img/90x90.jpg" alt="{{ Auth()->user()->name }}">
+        @endif
+    </a>
+    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+        <div class="user-profile-section">
+            <div class="media mx-auto">
+                @if (Auth()->user()->photo_profile)
+                    <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}" class="img-fluid mr-2"
+                        alt="{{ Auth()->user()->name }}">
+                @else
+                    <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="{{ Auth()->user()->name }}">
+                @endif
+                <div class="media-body">
+                    <h5>{{ Auth()->user()->name }}</h5>
                 </div>
-            </li>
-        </ul>
-    </header>
+            </div>
+        </div>
+        <div class="dropdown-item">
+            <a href="{{ route('user_profile') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-user">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg> <span> Perfil</span>
+            </a>
+        </div>
+        <div class="dropdown-item">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-log-out">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg> <span>{{ __('Cerrar Sesión') }}</span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
+    </div>
+</li>
+</ul>
+</header>
 </div>
 <!--end::Header-->

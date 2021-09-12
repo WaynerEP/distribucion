@@ -2,7 +2,8 @@
 
 @section('main')
     <h2 class="">{{ __('Iniciar Sesión en') }} <a href="#"><span class="brand-name">A'MU</span></a></h2>
-    <p class="signup-link">Ingrese sus datos <a href="{{ route('register') }}">Create an account</a></p>
+    <p class="signup-link">Ingrese sus datos</p>
+    {{-- <p class="signup-link">Ingrese sus datos <a href="{{ route('register') }}">Create an account</a></p> --}}
 
     <form class="text-left" method="POST" action="{{ route('login') }}">
         @csrf
@@ -34,7 +35,7 @@
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                <input id="passwordd" type="password" class="form-control @error('password') is-invalid @enderror"
                     name="password" placeholder="Ingrese password" required autocomplete="current-password">
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -42,14 +43,13 @@
                     </span>
                 @enderror
             </div>
-            <div class="d-sm-flex justify-content-between">
+            <div class="d-sm-flex justify-content-between mt-3">
                 <div class="field-wrapper toggle-pass">
-                    <p class="d-inline-block">Mantenerme conectado</p>
-                    <label class="switch s-primary">
-                        <input class="d-none" type="checkbox" name="remember" id="toggle-password"
-                            {{ old('remember') ? 'checked' : '' }}>
-                        <span class="slider round"></span>
-                    </label>
+                    <label class="new-control new-checkbox checkbox-outline-primary">
+                        <input type="checkbox" name="remember" id="toggle-password"
+                        {{ old('remember') ? 'checked' : '' }} class="new-control-input">
+                        <span class="new-control-indicator"></span>Keep me logged in
+                      </label>
                 </div>
                 <div class="field-wrapper">
                     <button type="submit" class="btn btn-primary" value="">{{ __('Iniciar Sesión') }}</button>
@@ -57,7 +57,7 @@
             </div>
 
 
-            <div class="field-wrapper">
+            <div class="field-wrapper mt-3">
                 @if (Route::has('password.request'))
                     <a class="forgot-pass-link" href="{{ route('password.request') }}">
                         {{ __('Olvidastes tu contraseña?') }}

@@ -30,13 +30,12 @@ class ciudadanoController extends Component
         $data = DB::table('ciudadano')->select('nombre', 'aPaterno', 'aMaterno', 'dni', 'email', 'direccion', 'telefono')
             ->where('nombre', 'LIKE', "%$this->search%")
             ->orWhere('aPaterno', 'LIKE', "%$this->search%")
-            ->orWhere('aMaterno', 'LIKE', "%$this->search%  ")
             ->paginate($this->pagination);
         $niveles = DB::table('nivelEstudios')->orderBy('idNivel', 'asc')->get();
         $departamentos = DB::table('departamento')->orderBy('idDepa', 'asc')->get();
         return view('livewire.Ciudadano.index', ['ciudadanos' => $data, 'departamentos' => $departamentos, 'niveles' => $niveles])
             ->extends('layouts.app')
-            ->section('content');;
+            ->section('content');
     }
 
 

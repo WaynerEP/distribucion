@@ -16,8 +16,8 @@
                     </div>
                     <div class="form-group">
                         <label for="fullName">Nueva Contraseña</label>
-                        <input type="password" wire:model.defer="new_password" class="form-control"
-                            id="new_password" placeholder="Ingrese nueva contraseña">
+                        <input type="password" wire:model.defer="new_password" class="form-control" id="new_password"
+                            placeholder="Ingrese nueva contraseña">
                         @error('new_password')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
@@ -26,8 +26,8 @@
                     </div>
                     <div class="form-group">
                         <label for="fullName">Repita Contraseña</label>
-                        <input type="password" wire:model.defer="confirm_password" class="form-control" id="repeat_contraseña"
-                            placeholder="Repita la contraseña">
+                        <input type="password" wire:model.defer="confirm_password" class="form-control"
+                            id="repeat_contraseña" placeholder="Repita la contraseña">
                         @error('confirm_password')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}

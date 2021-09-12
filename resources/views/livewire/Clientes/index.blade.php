@@ -1,10 +1,6 @@
 @section('titlePage')
     <h3>Clientes</h3>
 @endsection
-@section('styles')
-    <link href="assets/css/tables/table-basic.css" rel="stylesheet" type="text/css">
-    <link href="plugins/loaders/custom-loader.css" rel="stylesheet" type="text/css">
-@endsection
 
 <div class="row layout-top-spacing">
     <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
@@ -47,75 +43,78 @@
                         <thead>
                             <tr class="table-dark">
                                 <th>Id</th>
-                                <th>Código</th>
-                                <th>Descripción</th>
-                                <th>Ubicación</th>
-                                <th>Referencia</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>email</th>
+                                <th>Dirección</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @if ($clientes->isNotEmpty())
-                            @foreach ($clientes as $cliente)
+                            @if ($clientes->isNotEmpty())
+                                @foreach ($clientes as $cliente)
+                                    <tr>
+                                        <td>{{ $cliente->idCliente }}</td>
+                                        <td>{{ $cliente->nombre }} {{ $cliente->aPaterno }}
+                                            {{ $cliente->aMaterno }}</td>
+                                        <td>{{ $cliente->email }}</td>
+                                        <td>{{ $cliente->direccion }}</td>
+                                        <td class="text-center">
+                                            @if ($cliente->estado)
+                                                <span class="shadow-none badge badge-primary">Activo</span>
+                                            @else
+                                                <span class="shadow-none badge badge-danger">Inactivo</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            <ul class="table-controls">
+                                                <li>
+                                                    <a href="javascript:void(0);"
+                                                        wire:click="Edit({{ $cliente->idCliente }})"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Edit"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" class="feather feather-edit-2">
+                                                            <path
+                                                                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                                {{--  <li>
+                                                    <a href="javascript:void(0);"
+                                                        onclick="Confirm('{{ $cliente->idCliente }}')"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" class="feather feather-trash-2">
+                                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                                            <path
+                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                            </path>
+                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                        </svg>
+                                                    </a>
+                                                </li>  --}}
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
                                 <tr>
-                                    <td>{{ $cliente->idAlmacen }}</td>
-                                    <td>{{ $cliente->codigo }}</td>
-                                    <td>{{ $cliente->nombre }}</td>
-                                    <td>{{ $cliente->direccion }}</td>
-                                    <td>
-                                        @if ($cliente->referencia)
-                                            {{ $cliente->referencia }}
-                                        @else
-                                            <span>-----</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <ul class="table-controls">
-                                            <li>
-                                                <a href="javascript:void(0);"
-                                                    wire:click="Edit({{ $cliente->idAlmacen }})" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Edit"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-edit-2">
-                                                        <path
-                                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);"
-                                                    onclick="Confirm('{{ $cliente->idAlmacen }}')"
-                                                    data-toggle="tooltip" data-placement="top" title=""
-                                                    data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-trash-2">
-                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                        <path
-                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                        </path>
-                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
+                                    <td class="text-center" colspan="6"> No se encontraron similitudes</td>
                                 </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td class="text-center" colspan="6"> No se encontraron similitudes</td>
-                            </tr>
-                        @endif --}}
+                            @endif
                         </tbody>
                     </table>
                 </div>
                 <div>
-                    {{-- {{ $clientes->links() }} --}}
+                    {{ $clientes->links() }}
                 </div>
             </div>
 

@@ -18,6 +18,7 @@ class Producto extends Model
         'precio',
         'idAlmacen',
         'idCategoriaProducto',  
+        'image',  
     ];
     public $timestamps = false;
 }

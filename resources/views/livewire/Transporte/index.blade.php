@@ -2,8 +2,8 @@
     <h3>Vehículos de transportes</h3>
 @endsection
 @section('styles')
-    <link href="assets/css/components/custom-modal.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="assets/css/forms/theme-checkbox-radio.css">
+    <link href="{{ asset('assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
 @endsection
 <div class="row layout-top-spacing">
     <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
@@ -22,7 +22,7 @@
                                 <div class="search-bar">
                                     <input type="text" wire:model="search"
                                         class="form-control form-control-sm search-form-control ml-lg-auto"
-                                        placeholder="Buscar por nombres y apellidos...">
+                                        placeholder="Buscar por n° matrícula...">
                                 </div>
                             </form>
                         </div>
