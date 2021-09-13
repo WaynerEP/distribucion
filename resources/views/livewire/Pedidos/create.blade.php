@@ -20,7 +20,7 @@
 
                                 <div class="invoice-logo">
                                     <img alt="avatar" src="{{ asset('assets/img/logo.png') }}"
-                                        class="img-fluid rounded w-50" />
+                                        class="img-fluid rounded w-75" />
                                 </div>
                                 <div class="invoice-title">
                                     <div class="form-group mb-4">
@@ -468,7 +468,7 @@
             window.livewire.on('order-stored', event => {
                 swal({
                     title: 'Registrando pedido!',
-                    timer: 1500,
+                    timer: 1000,
                     padding: '2em',
                     onOpen: function() {
                         swal.showLoading()
@@ -482,7 +482,7 @@
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
-                            timer: 3000,
+                            timer: 2500,
                             padding: '2em'
                         });
 

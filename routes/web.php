@@ -14,6 +14,7 @@ use App\Http\Livewire\transporteController;
 use App\Http\Livewire\pedidoController;
 use App\Http\Livewire\reportesController;
 use App\Http\Livewire\editPedido;
+use App\Http\Livewire\listaPedidosController;
 
 // use App\Http\Livewire\reportesController;
 
@@ -57,6 +58,13 @@ Route::get('/reportes/pdf/{empleado}/{type}',  [App\Http\Controllers\reportesCon
 Route::get('/reportes/excel/{empleado}/{type}/{f1}/{f2}',  [App\Http\Controllers\reportesController::class, 'reportEXCEL']);
 Route::get('/reportes/excel/{empleado}/{type}',  [App\Http\Controllers\reportesController::class, 'reportEXCEL']);
 
+// Route::get('/email', function () {
+//     return view('Email.sendEmail');
+// });
+
+//Pedidos
+Route::get('/listPedidos/create', listaPedidosController::class)->name('createListOrder')->middleware('auth');
+Route::get('/listPedidos/list', [App\Http\Controllers\listaPedidosController::class, 'index'])->name('listOrder')->middleware('auth');
 
 
 

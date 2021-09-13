@@ -61,13 +61,13 @@
                                                         </div>
 
                                                         <div class="col-xl-12 col-md-4">
-                                                            <a href="  {{ url('/report/pdf/' . $idempleado . '/' . $tipoReporte . '/' . $date1 . '/' . $date2) }} "
+                                                            <a href="  {{ url('/reportes/pdf/' . $idempleado . '/' . $tipoReporte . '/' . $date1 . '/' . $date2) }} "
                                                                 class="btn btn-dark btn-preview {{ count($data) > 0 ? '' : 'disabled' }}"
                                                                 target="_blank">GENERAR
                                                                 PDF</a>
                                                         </div>
                                                         <div class="col-xl-12 col-md-4">
-                                                            <a href="{{ url('/report/excel/' . $idempleado . '/' . $tipoReporte . '/' . $date1 . '/' . $date2) }}"
+                                                            <a href="{{ url('/reportes/excel/' . $idempleado . '/' . $tipoReporte . '/' . $date1 . '/' . $date2) }}"
                                                                 class="btn btn-success btn-download {{ count($data) > 0 ? '' : 'disabled' }}"
                                                                 target="_blank">GENERAR EXCEL</a>
                                                         </div>

@@ -41,7 +41,7 @@
                                             <div class="d-flex">
                                                 <div class="avatar avatar-sm mr-2">
                                                     @if ($d->image)
-                                                        <img alt="{{ $d->image }}" loading="lazy"
+                                                        <img alt="{{ $d->nombre }}" loading="lazy"
                                                             class="rounded"
                                                             src="{{ asset('storage/products/' . $d->image) }}">
                                                     @else

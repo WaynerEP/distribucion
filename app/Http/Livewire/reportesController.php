@@ -54,7 +54,7 @@ class reportesController extends Component
         }
 
         if ($this->idempleado == 0) {
-            $this->data = DB::select('call spReportes(?,?)', array($date1, $date2));
+            $this->data = DB::select('call spReportesAll(?,?)', array($date1, $date2));
         } else {
             $this->data = DB::select('call spReporteByEmpleado(?,?,?)', array($this->idempleado, $date1, $date2));
         }
@@ -62,9 +62,9 @@ class reportesController extends Component
 
     public function getDetails($id)
     {
-        $this->details = DetallePedido::join('producto as p', 'p.idProducto', 'detallePedido.idProducto')
-            ->select('detallePedido.idPedido', 'p.nombre', 'p.precio','p.image', 'detallePedido.cantidadPedida','detallePedido.descuento')
-            ->where('detallePedido.idPedido', $id)
+        $this->details = DetallePedido::join('producto as p', 'p.idProducto', '=', 'detallePedido.idProducto')
+            ->select('detallePedido.idPedido', 'p.nombre', 'p.precio', 'p.image', 'detallePedido.cantidadPedida', 'detallePedido.descuento')
+            ->where('detallePedido.idPedido', '=', $id)
             ->get();
 
         $suma = $this->details->sum(function ($item) {

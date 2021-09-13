@@ -23,8 +23,8 @@
 
                                         <div class="invoice-logo row d-flex">
                                             <div class="col-sm-6 col-12 my-auto">
-                                                <img alt="avatar" src="http://127.0.0.1:8000/assets/img/logo.png"
-                                                    class="img-fluid rounded w-50">
+                                                <img alt="avatar" src="{{ asset('assets/img/logo.png') }}"
+                                                    class="img-fluid rounded w-100">
                                             </div>
                                             <div class="col-sm-6 align-self-center">
                                                 <p class="inv-street-addr">A'mu Distribuciones S.A</p>
@@ -129,12 +129,11 @@
                                                             <option value="" disabled>Seleccione...</option>
                                                             <option value="0">Cancelado</option>
                                                             <option value="1">Confirmado</option>
-                                                            <option value="2">Preparando Entrega</option>
-                                                            <option value="3">Envio en reparto</option>
-                                                            <option value="4">Entregado</option>
+                                                            <option value="2">Envio en reparto</option>
+                                                            <option value="3">Entregado</option>
                                                         </select>
                                                     @endif
-                                                    @if ($estado == 4)
+                                                    @if ($estado == 3)
                                                         <span class="badge badge-success"> ENTREGADO AL CLIENTE </span>
                                                     @endif
                                                     @if ($estado == 0)
@@ -153,7 +152,7 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-4">
-                                            @if ($estado != 4 && $estado != 0)
+                                            @if ($estado != 3 && $estado != 0)
                                                 <a href="javascript:void(0);" wire:click="update()"
                                                     class="btn btn-primary btn-send">
                                                     <div wire:loading wire:target="update"

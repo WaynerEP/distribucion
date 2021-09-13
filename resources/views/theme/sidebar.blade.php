@@ -158,6 +158,36 @@
                  </ul>
              </li>
 
+             <li class="menu {{ request()->is('listPedidos/*') ? 'active' : '' }}">
+                 <a href="#components" data-toggle="collapse"
+                     aria-expanded="{{ request()->is('listPedidos/*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                     <div class="">
+                        <svg xmlns=" http://www.w3.org/2000/svg" width="24"
+                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                         <line x1="12" y1="1" x2="12" y2="23"></line>
+                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                         <span>Empaquetamiento</span>
+                     </div>
+                     <div>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-chevron-right">
+                             <polyline points="9 18 15 12 9 6"></polyline>
+                         </svg>
+                     </div>
+                 </a>
+                 <ul class="collapse submenu {{ request()->is('listPedidos/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                     id="components" data-parent="#accordionExample">
+                     <li class="{{ request()->is('listPedidos/list') ? 'active' : '' }}">
+                         <a href="{{ route('listOrder') }}"> Listado </a>
+                     </li>
+                     <li class="{{ request()->is('listPedidos/create') ? 'active' : '' }}">
+                         <a href="{{ route('createListOrder') }}"> Registrar </a>
+                     </li>
+                 </ul>
+             </li>
+
              <li class="menu menu-heading">
                  <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

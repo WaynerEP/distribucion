@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\confirmacionEmail;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Producto;
 use App\Models\Pedido;
 use App\Models\DetallePedido;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use DB;
 
 class pedidoController extends Component
@@ -35,7 +38,7 @@ class pedidoController extends Component
         $orderProducts = session()->has('carrito') ? session('carrito') : [];
         return view('livewire.Pedidos.create', ['orderProducts' => $orderProducts, 'employees' => $employees, 'customers' => $customers, 'allProducts' => $allProducts])
             ->extends('layouts.app')
-            ->section('content');;
+            ->section('content');
     }
 
 
@@ -210,6 +213,7 @@ class pedidoController extends Component
 
     public function store()
     {
+
         $this->validate(
             [
                 'idEmployee' => 'required',
@@ -240,6 +244,15 @@ class pedidoController extends Component
                     'descuento' => $carrito[$index]['discount']
                 ]);
             }
+
+            $dataPedidos = DB::select('call sp_PedidosClientes(?)', array($id));
+            $dataProductos = DetallePedido::join('producto as p', 'p.idProducto', '=', 'detallePedido.idProducto')
+                ->select('detallePedido.idPedido', 'p.nombre', 'p.precio', 'p.image', 'detallePedido.cantidadPedida', 'detallePedido.descuento')
+                ->where('detallePedido.idPedido', '=', $id)
+                ->get();
+            $data = json_decode($dataProductos);
+            Mail::to('kperezespi@gmail.com')->send(new confirmacionEmail($dataPedidos, $data));
+
             $this->emit('order-stored', 'Pedido registrado correctamente!');
 
             $this->resetUI();

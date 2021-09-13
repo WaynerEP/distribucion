@@ -82,10 +82,6 @@
                                                     <span class="badge outline-badge-primary"> Confirmado </span>
                                                 @break
                                                 @case(2)
-                                                    <span class="badge outline-badge-info"> Preparando Entrega
-                                                    </span>
-                                                @break
-                                                @case(3)
                                                     <span class="badge outline-badge-warning"> Pedido en Reparto
                                                     </span>
                                                 @break
@@ -133,4 +129,6 @@
 
     </div>
 @endsection
-
+@section('scripts')
+    <script src="{{ asset('assets/js/apps/invoice-list.js') }}"></script>
+@endsection
