@@ -5,6 +5,7 @@
 @section('styles')
     <link href="{{ asset('assets/css/apps/invoice-add.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/apps/todolist.css') }}" rel="stylesheet" type="text/css">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('plugins/animate/animate.css') }}"> --}}
 @endsection
 
 <div class="row layout-top-spacing">
@@ -28,38 +29,15 @@
                                         <label for="number">N° Lista:</label>
                                         <input type="text"
                                             value="#{{ str_pad($nroLista->nro, 5, '0', STR_PAD_LEFT) }}"
-                                            class="form-control form-control-sm" id="number" placeholder="-">
+                                            class="form-control form-control-sm" id="number" placeholder="-" disabled>
                                     </div>
                                 </div>
 
-                            </div>
-                            {{-- {{ $orderProducts }} --}}
-                            <div class="invoice-detail-header">
-
-                                <div class="row justify-content-between">
-                                    <div class="col-xl-12 invoice-address-company">
-
-                                        <h4>Info:-</h4>
-
-                                        <div class="invoice-address-company-fields">
-                                            <div class="form-group row">
-                                                <label for="company-name"
-                                                    class="col-sm-4 col-form-label col-form-label-sm">Nombre de la
-                                                    Lista</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" wire:model="nombreLista"
-                                                        class="form-control form-control-sm" id="company-name"
-                                                        placeholder="Name">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="invoice-detail-terms">
                                 <div class="row justify-content-between">
                                     <div class="col-md-3">
-                                        <button class="btn btn-secondary additem btn-sm" data-toggle="modal"
+                                        <button class="btn btn-primary additem btn-sm" data-toggle="modal"
                                             data-target="#productsModal">Agregar Pedidos</button>
                                     </div>
                                 </div>
@@ -69,7 +47,7 @@
                                 <div class="table-responsive do-nicescrol" style="max-height: 450px; overflow: auto;">
                                     <table class="table table-bordered item-table">
                                         <thead>
-                                            <tr class="table-secondary">
+                                            <tr class="">
                                                 <th>#</th>
                                                 <th>N° PED.</th>
                                                 <th>N° DOC.</th>
@@ -85,48 +63,51 @@
                                             @if (count($listaPedidos) > 0)
                                                 @foreach ($listaPedidos as $index => $listaPedido)
                                                     <tr>
-                                                        <td class="delete-item-row">
-                                                            <ul class="table-controls">
-                                                                <li><a href="javascript:void(0);"
-                                                                        wire:click.prevent="removeProduct({{ $index }})"
-                                                                        class="delete-item"><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-x-circle">
-                                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                                            <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                                            <line x1="9" y1="9" x2="15" y2="15"></line>
-                                                                        </svg></a></li>
-                                                            </ul>
-                                                        </td>
-                                                        <td>{{ str_pad($listaPedidos[$index]['id'], 5, '0', STR_PAD_LEFT) }}
-                                                        </td>
-                                                        <td>{{ $listaPedidos[$index]['nroDocumento'] }}</td>
-                                                        <td class="text-left">
-                                                            {{ $listaPedidos[$index]['cliente'] }}</td>
-                                                        <td class="text-left">
-                                                            <select id="r{{ $index}}" wire:change="addEmpaquetador({{ $index }}, $('#r'+{{ $index }}).val())" class="form-control form-control-sm">
-                                                                <option selected>Seleccione</option>
-                                                                @foreach ($empaquetadores as $e )
-                                                                <option value="{{ $e->idEmpleado}}">{{ $e->dni }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </td>
-                                                        <td class="text-left">
-                                                            S/.{{ $listaPedidos[$index]['monto'] }}</td>
-                                                    </tr>
-                                                    <?php $total += $listaPedidos[$index]['monto']; ?>
-                                                @endforeach
-                                            @else
-                                                <tr>
-                                                    <td class="text-center" colspan="6">Seleccione pedidos!!
-                                                    </td>
-                                                </tr>
+                                                        <td class="
+                                                delete-item-row">
+                                                <ul class="table-controls">
+                                                    <li><a href="javascript:void(0);"
+                                                            wire:click.prevent="removeProduct({{ $index }})"
+                                                            class="delete-item"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-x-circle">
+                                                                <circle cx="12" cy="12" r="10"></circle>
+                                                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                                                            </svg></a></li>
+                                                </ul>
+                                                </td>
+                                                <td>{{ str_pad($listaPedidos[$index]['id'], 5, '0', STR_PAD_LEFT) }}
+                                                </td>
+                                                <td>{{ $listaPedidos[$index]['nroDocumento'] }}</td>
+                                                <td class="text-left">
+                                                    {{ $listaPedidos[$index]['cliente'] }}</td>
+                                                <td class="text-left">
+                                                    <select id="r{{ $index }}"
+                                                        wire:change="addEmpaquetador({{ $index }}, $('#r'+{{ $index }}).val())"
+                                                        class="form-control form-control-sm text-primary">
+                                                        <option value="">Seleccione...</option>
+                                                        @foreach ($empaquetadores as $e)
+                                                            <option value="{{ $e->idEmpleado }}">
+                                                                {{ $e->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="text-left">
+                                                    S/.{{ number_format($listaPedidos[$index]['monto'], 2) }}</td>
+                                            </tr>
+                                            <?php $total += $listaPedidos[$index]['monto']; ?>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td class="text-center" colspan="6">Seleccione pedidos!!
+                                                </td>
+                                            </tr>
                                             @endif
-                                        </tbody>
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -199,15 +180,42 @@
                             <div class="row">
                                 <div class="col-xl-12 col-md-4">
                                     <a href="javascript:void(0);" wire:click="store()" class="btn btn-primary btn-send">
-                                        <div wire:loading wire:target="store"
-                                            class="spinner-border text-white mr-2 align-self-center loader-sm ">
-                                            Loading...</div>
-                                        Guardar
+                                        <svg wire:loading wire:target="store" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-loader spin mr-2">
+                                            <line x1="12" y1="2" x2="12" y2="6"></line>
+                                            <line x1="12" y1="18" x2="12" y2="22"></line>
+                                            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                                            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                                            <line x1="2" y1="12" x2="6" y2="12"></line>
+                                            <line x1="18" y1="12" x2="22" y2="12"></line>
+                                            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                                            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                                        </svg>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
+                                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
+                                            </path>
+                                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                            <polyline points="7 3 7 8 15 8"></polyline>
+                                        </svg> Guardar
                                     </a>
                                 </div>
                                 <div class="col-xl-12 col-md-4">
                                     <a href="javascript:void(0);" wire:click="resetAll()"
-                                        class="btn btn-success btn-download">Resetear</a>
+                                        class="btn btn-success btn-download"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-alert-octagon">
+                                            <polygon
+                                                points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2">
+                                            </polygon>
+                                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                        </svg> Resetear</a>
                                 </div>
                             </div>
                         </div>
@@ -230,6 +238,23 @@
             window.livewire.on('lista-stored', message => {
                 showMessage(message);
             });
+            window.livewire.on('errors', message => {
+                errorMessage(message);
+            });
+            window.livewire.on('error-empaquetador', message => {
+                errorMessage(message);
+            });
+
         });
+
+        function errorMessage(message) {
+            Snackbar.show({
+                text: message,
+                pos: 'top-right',
+                actionText: 'Cerrar',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a'
+            });
+        }
     </script>
 @endsection

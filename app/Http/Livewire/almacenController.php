@@ -139,7 +139,7 @@ class almacenController extends Component
     public function resetUI()
     {
         $this->reset('codigo', 'nombre', 'direccion', 'referencia', 'SelectedDepa', 'SelectedProv', 'SelectedDist', 'title', 'search', 'selected_id');
-        $this->resetErrorBag();
         $this->resetValidation();
+        // $this->resetErrorBag();
     }
 }

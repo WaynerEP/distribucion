@@ -28,7 +28,7 @@
                             <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}"
                                 alt="{{ Auth()->user()->name }}">
                         @else
-                            <img src="assets/img/90x90.jpg" alt="{{ Auth()->user()->name }}">
+                            <img src="{{ asset('assets/img/90x90.jpg') }}" alt="{{ Auth()->user()->name }}">
                         @endif
                         <p class="">{{ auth()->user()->name }}</p>
                     </div>

@@ -1,7 +1,6 @@
 @extends('Layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/custom_dt_html5.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/dt-global_style.css') }}">
     <link href="{{ asset('assets/css/apps/invoice-list.css') }}" rel="stylesheet" type="text/css">
@@ -16,9 +15,6 @@
     <div class="row layout-top-spacing">
         <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
             <div class="widget-content widget-content-area br-6">
-                <div class="dt-buttons text-right p-2">
-                    <a href="{{ route('createListOrder') }}" class="dt-button btn btn-primary btn-sm"><span>+</span></a>
-                </div>
                 <div id="invoice-list_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                     <div class="table-responsive">
                         <table id="html5-extension" class="table table-hover" style="width: 100%;">
@@ -27,7 +23,7 @@
                                     <th>#</th>
                                     <th>Descripción</th>
                                     <th>Fecha de Registro</th>
-                                    <th>Registradr</th>
+                                    <th>Registrador</th>
                                     <th>N° Pedidos</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -38,7 +34,6 @@
                                         <td>{{ $d->idListaPedidos }}</span></a>
                                         </td>
                                         <td>{{ $d->nombre }}</td>
-                                        <td>
 
                                         <td><span class="inv-date"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -52,9 +47,11 @@
                                         <td>
                                             {{ $d->registrador }}
                                         </td>
-                                        <td>{{ $d->npedidos }}}}</span>
+                                        <td>{{ $d->nPedido }} pedidos</span>
                                         </td>
-                                        <td class="text-center"><button class="btn btn-primary btn-sm">View</button>
+                                        <td class="text-center">
+                                            <a href="{{ url('listPedidos/'. $d->idListaPedidos.'/show') }}"
+                                                class="btn btn-outline-primary btn-sm">Ver Detalle</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -92,6 +89,13 @@
                     {
                         extend: 'print',
                         className: 'btn btn-sm'
+                    },
+                    {
+                        text: 'Nuevo Registro',
+                        className: 'btn btn-sm',
+                        action: function(e, dt, node, config) {
+                            window.location = 'create';
+                        }
                     }
                 ]
             },
@@ -106,8 +110,8 @@
                 "sLengthMenu": "Resultados :  _MENU_",
             },
             "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
+            "lengthMenu": [10, 15, 20, 50],
+            "pageLength": 9
         });
     </script>
 @endsection

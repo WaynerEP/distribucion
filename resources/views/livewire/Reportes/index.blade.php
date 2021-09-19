@@ -86,7 +86,7 @@
                     <div class="invoice-actions">
                         <div class="widget-content widget-content-area">
                             <div class="table-responsive">
-                                <table class="table mb-4">
+                                <table class="table mb-4" style="max-height: 450px; overflow: scroll;">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
@@ -107,60 +107,49 @@
                                                     <td>{{ $d->nombre }}</td>
                                                     <td>{{ $d->fecha }}</td>
                                                     <td class="">
-                                               @switch($d->estadoPedido)
-                                               @case(0)
+                                               @if (!$d->estadoPedido)
                                                    <span class="
-                                                        badge outline-badge-danger"> Cancelado </span>
-                                            @break
-                                            @case(1)
-                                                <span class="badge outline-badge-primary"> Confirmado </span>
-                                            @break
-                                            @case(2)
-                                                <span class="badge outline-badge-info"> Preparando Entrega
-                                                </span>
-                                            @break
-                                            @case(3)
-                                                <span class="badge outline-badge-warning"> Pedido en Reparto
-                                                </span>
-                                            @break
-                                            @default
-                                                <span class="badge outline-badge-success"> Pedido Entregado </span>
-                                        @endswitch
-                                        </td>
-                                        <td class="text-center"><button wire:click="getDetails({{ $d->idPedido }})"
-                                                class="btn btn-primary btn-sm">View</button> </td>
+                                                        badge outline-badge-primary"> En proceso </span>
+                                                    @else
+                                                        <span class="badge outline-badge-success"> Pedido Entregado
+                                                        </span>
+                                            @endif
+                                            </td>
+                                            <td class="text-center"><button
+                                                    wire:click="getDetails({{ $d->idPedido }})"
+                                                    class="btn btn-primary btn-sm">View</button> </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td class="text-center" colspan="6"> Sin resultados!!</td>
                                         </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td class="text-center" colspan="6"> Sin resultados!!</td>
-                                    </tr>
-                                    @endif
-                                </tbody>
-                            </table>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
-            </div>
-            @include('Livewire.Reportes.details')
+                @include('Livewire.Reportes.details')
 
+            </div>
         </div>
     </div>
 </div>
-</div>
 @section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        flatpickr(document.getElementById('date01'));
-        flatpickr(document.getElementById('date02'));
-        window.livewire.on('show-modal', message => {
-            $('#detailsModal').modal('show');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr(document.getElementById('date01'));
+            flatpickr(document.getElementById('date02'));
+            window.livewire.on('show-modal', message => {
+                $('#detailsModal').modal('show');
+            });
+            // window.livewire.on('errors', message => {
+            //     errorMessage(message);
+            // });
         });
-        // window.livewire.on('errors', message => {
-        //     errorMessage(message);
-        // });
-    });
-</script>
+    </script>
 @endsection

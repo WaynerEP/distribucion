@@ -12,7 +12,7 @@ class reportesController extends Component
 {
 
     public $data, $idempleado, $tipoReporte, $date1, $date2,
-        $details, $sumDetails, $countDetails, $orderId;
+        $detailsProducts, $sumDetails, $countDetails, $orderId;
 
     public function render()
     {
@@ -30,7 +30,7 @@ class reportesController extends Component
     public function mount()
     {
         $this->data = [];
-        $this->details = [];
+        $this->detailsProducts = [];
         $this->sumDetails = 0;
         $this->countDetails = 0;
         $this->tipoReporte = 0;
@@ -62,17 +62,18 @@ class reportesController extends Component
 
     public function getDetails($id)
     {
-        $this->details = DetallePedido::join('producto as p', 'p.idProducto', '=', 'detallePedido.idProducto')
+        $this->detailsProducts = DetallePedido::join('producto as p', 'p.idProducto', '=', 'detallePedido.idProducto')
             ->select('detallePedido.idPedido', 'p.nombre', 'p.precio', 'p.image', 'detallePedido.cantidadPedida', 'detallePedido.descuento')
             ->where('detallePedido.idPedido', '=', $id)
             ->get();
 
-        $suma = $this->details->sum(function ($item) {
-            return $item->precio * $item->cantidadPedida;
+        $suma = $this->detailsProducts->sum(function ($item) {
+            return ($item->precio * $item->cantidadPedida)+(($item->precio * $item->cantidadPedida)*0.18);
+
         });
 
         $this->sumDetails = $suma;
-        $this->countDetails = $this->details->sum('cantidadPedida');
+        $this->countDetails = $this->detailsProducts->sum('cantidadPedida');
         $this->orderId = $id;
 
         $this->emit('show-modal', 'Loadind data');

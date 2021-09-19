@@ -1,7 +1,6 @@
 @section('titlePage')
     <h3>Clientes</h3>
 @endsection
-
 <div class="row layout-top-spacing">
     <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
         <div class="statbox widget box box-shadow">
@@ -52,15 +51,15 @@
                         </thead>
                         <tbody>
                             @if ($clientes->isNotEmpty())
-                                @foreach ($clientes as $cliente)
+                                @foreach ($clientes as $c)
                                     <tr>
-                                        <td>{{ $cliente->idCliente }}</td>
-                                        <td>{{ $cliente->nombre }} {{ $cliente->aPaterno }}
-                                            {{ $cliente->aMaterno }}</td>
-                                        <td>{{ $cliente->email }}</td>
-                                        <td>{{ $cliente->direccion }}</td>
+                                        <td>{{ $c->idCliente }}</td>
+                                        <td>{{ $c->nombre }} {{ $c->aPaterno }}
+                                            {{ $c->aMaterno }}</td>
+                                        <td>{{ $c->email }}</td>
+                                        <td>{{ $c->direccion }}</td>
                                         <td class="text-center">
-                                            @if ($cliente->estado)
+                                            @if ($c->estado)
                                                 <span class="shadow-none badge badge-primary">Activo</span>
                                             @else
                                                 <span class="shadow-none badge badge-danger">Inactivo</span>
@@ -70,9 +69,8 @@
                                             <ul class="table-controls">
                                                 <li>
                                                     <a href="javascript:void(0);"
-                                                        wire:click="Edit({{ $cliente->idCliente }})"
-                                                        data-toggle="tooltip" data-placement="top" title=""
-                                                        data-original-title="Edit"><svg
+                                                        wire:click="edit({{ $c->idCliente }})" data-toggle="tooltip"
+                                                        data-placement="top" title="" data-original-title="Edit"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round"
@@ -83,11 +81,10 @@
                                                         </svg>
                                                     </a>
                                                 </li>
-                                                {{--  <li>
+                                                <li>
                                                     <a href="javascript:void(0);"
-                                                        onclick="Confirm('{{ $cliente->idCliente }}')"
-                                                        data-toggle="tooltip" data-placement="top" title=""
-                                                        data-original-title="Delete"><svg
+                                                        onclick="Confirm('{{ $c->idCliente }}')" data-toggle="tooltip"
+                                                        data-placement="top" title="" data-original-title="Delete"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round"
@@ -100,14 +97,14 @@
                                                             <line x1="14" y1="11" x2="14" y2="17"></line>
                                                         </svg>
                                                     </a>
-                                                </li>  --}}
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="text-center" colspan="6"> No se encontraron similitudes</td>
+                                    <td class="text-center" colspan="6"> No hay Resultados!! 🙁</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -121,44 +118,54 @@
             @include('Livewire.Clientes.form')
         </div>
     </div>
-
 </div>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        window.livewire.on('show-modal', message => {
-            $('#AlmacenModal').modal('show');
-        });
-        window.livewire.on('almacen-added', message => {
-            $('#AlmacenModal').modal('hide');
-            showMessage(message);
-        });
-        window.livewire.on('almacen-updated', message => {
-            $('#AlmacenModal').modal('hide');
-            showMessage(message);
-        });
-    });
+@section('scripts')
+    {{-- <script src="{{ asset('plugins/select2/select2.min.js') }}"></script> --}}
 
-    function Confirm(id) {
-        swal({
-            title: 'CONFIRMAR',
-            type: 'warning',
-            text: "Estàs seguro de eliminar este registro!",
-            showCancelButton: true,
-            confirmButtonText: 'Eliminar',
-            confirmButtonColor: '#3b3f5c',
-            cancelButtonText: 'Cancelar',
-            cancelButtonColor: '#fff',
-        }).then(function(result) {
-            if (result.value) {
-                window.livewire.emit('deleteRow', id);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // var ss = $(".basic").select2({
+            //     tags: true,
+            //     dropdownParent: $('#clienteModal')
+            // });
+
+            window.livewire.on('show-modal', message => {
+                $('#clienteModal').modal('show');
+            });
+            window.livewire.on('cliente-added', message => {
+                $('#clienteModal').modal('hide');
+                showMessage(message);
+            });
+            window.livewire.on('cliente-updated', message => {
+                $('#clienteModal').modal('hide');
+                showMessage(message);
+            });
+            window.livewire.on('cliente-destroyed', message => {
                 swal(
                     'Eliminado!',
-                    'El registro ha sido eliminado.',
+                    message,
                     'success'
                 )
-            }
-        })
-    }
-</script>
+            });
+        });
+
+        function Confirm(id) {
+            swal({
+                title: 'CONFIRMAR',
+                type: 'warning',
+                text: "Estàs seguro de eliminar este registro!",
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                confirmButtonColor: '#3b3f5c',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#fff',
+            }).then(function(result) {
+                if (result.value) {
+                    window.livewire.emit('deleteRow', id);
+                }
+            })
+        }
+    </script>
+@endsection

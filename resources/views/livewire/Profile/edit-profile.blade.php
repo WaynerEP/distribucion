@@ -28,7 +28,7 @@
                                                                 <img
                                                                     src="{{ asset('storage/profile/' . $photoProfile) }}">
                                                             @else
-                                                                <img src="assets/img/200x200.jpg">
+                                                                <img src="{{ asset('assets/img/200x200.jpg') }}">
                                                             @endif
                                                         </span>
                                                         <div class="dropify-infos">

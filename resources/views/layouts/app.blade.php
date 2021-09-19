@@ -13,22 +13,22 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/img/favicon.ico') }}" />
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-{{--  
-    <link href="assets/css/loader.css" rel="stylesheet" type="text/css">
-    <script src="assets/js/loader.js"></script>  --}}
+
+    {{-- <link href="{{ asset('assets/css/loader.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('assets/js/loader.js') }}"></script> --}}
 
     <!-- Styles -->
     @include('theme.styles')
 </head>
 
 <body>
-    {{--  <div id="load_screen">
+    {{-- <div id="load_screen">
         <div class="loader">
             <div class="loader-content">
                 <div class="spinner-grow align-self-center"></div>
             </div>
         </div>
-    </div>  --}}
+    </div> --}}
     @include('theme.header')
     <div class="main-container" id="container">
         <div class="overlay"></div>
@@ -36,7 +36,7 @@
         @include('theme.sidebar')
         <div id="content" class="main-content">
             <div class="layout-px-spacing">
-                    @yield('content')
+                @yield('content')
             </div>
             @include('theme.footer')
         </div>

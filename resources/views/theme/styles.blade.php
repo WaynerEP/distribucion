@@ -14,6 +14,9 @@
 <link href="{{ asset('plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('plugins/flatpickr/custom-flatpickr.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/datatables.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/select2/select2.min.css') }}">
+
 @yield('styles')
 
 @livewireStyles

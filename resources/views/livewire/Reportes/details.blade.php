@@ -31,8 +31,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($details) > 0)
-                                @foreach ($details as $d)
+                            @if (count($detailsProducts) > 0)
+                                @foreach ($detailsProducts as $d)
                                     <tr>
                                         <td class="checkbox-column">
                                             {{ $d->idPedido }}

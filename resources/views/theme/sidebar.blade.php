@@ -41,39 +41,39 @@
              </li>
 
              <li class="menu {{ request()->is('users/*') ? 'active' : '' }}">
-                <a href="#users" data-toggle="collapse"
-                    aria-expanded="{{ request()->is('users/*') ? 'true' : 'false' }}" class="dropdown-toggle">
-                    <div class="">
-                     <svg xmlns=" http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                        <span>Users</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-chevron-right">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu {{ request()->is('users/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
-                    id="users" data-parent="#accordionExample">
-                    <li class="{{ request()->is('users/list') ? 'active' : '' }}">
-                        <a href="{{ route('usersList') }}"> Users </a>
-                    </li>
-                    <li class="{{ request()->is('users/roles') ? 'active' : '' }}">
-                        <a href="{{ route('roles') }}"> Roles </a>
-                    </li>
-                    <li class="{{ request()->is('users/permisos') ? 'active' : '' }}">
-                        <a href="{{ route('permisos') }}"> Permisos </a>
-                    </li>
-                </ul>
-            </li>
+                 <a href="#users" data-toggle="collapse"
+                     aria-expanded="{{ request()->is('users/*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                     <div class="">
+                     <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round" class="feather feather-users">
+                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                         <circle cx="9" cy="7" r="4"></circle>
+                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                         <span>Users</span>
+                     </div>
+                     <div>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-chevron-right">
+                             <polyline points="9 18 15 12 9 6"></polyline>
+                         </svg>
+                     </div>
+                 </a>
+                 <ul class="collapse submenu {{ request()->is('users/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                     id="users" data-parent="#accordionExample">
+                     <li class="{{ request()->is('users/list') ? 'active' : '' }}">
+                         <a href="{{ route('usersList') }}"> Users </a>
+                     </li>
+                     <li class="{{ request()->is('users/roles') ? 'active' : '' }}">
+                         <a href="{{ route('roles') }}"> Roles </a>
+                     </li>
+                     <li class="{{ request()->is('users/permisos') ? 'active' : '' }}">
+                         <a href="{{ route('permisos') }}"> Permisos </a>
+                     </li>
+                 </ul>
+             </li>
              <li class="menu {{ request()->is('modules/*') ? 'active' : '' }}">
                  <a href="#elements" data-toggle="collapse"
                      aria-expanded="{{ request()->is('modules/*') ? 'true' : 'false' }}" class="dropdown-toggle">
@@ -113,12 +113,15 @@
                      <li class="{{ request()->is('modules/ciudadanos') ? 'active' : '' }}">
                          <a href="{{ route('ciudadanos') }}"> Ciudadanos </a>
                      </li>
+                     <li class="{{ request()->is('modules/empleados') ? 'active' : '' }}">
+                         <a href="{{ route('empleados') }}"> Empleados </a>
+                     </li>
                      <li class="{{ request()->is('modules/transporte') ? 'active' : '' }}">
                          <a href="{{ route('transporte') }}"> Transporte </a>
                      </li>
                  </ul>
              </li>
-             
+
 
              <li class="menu menu-heading">
                  <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -129,7 +132,7 @@
              </li>
 
              <li class="menu {{ request()->is('pedidos/*') ? 'active' : '' }}">
-                 <a href="#components" data-toggle="collapse"
+                 <a href="#invoice" data-toggle="collapse"
                      aria-expanded="{{ request()->is('pedidos/*') ? 'true' : 'false' }}" class="dropdown-toggle">
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
@@ -148,7 +151,7 @@
                      </div>
                  </a>
                  <ul class="collapse submenu {{ request()->is('pedidos/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
-                     id="components" data-parent="#accordionExample">
+                     id="invoice" data-parent="#accordionExample">
                      <li class="{{ request()->is('pedidos/list') ? 'active' : '' }}">
                          <a href="{{ route('listPedidos') }}"> Listado </a>
                      </li>
@@ -164,9 +167,10 @@
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
-                         <line x1="12" y1="1" x2="12" y2="23"></line>
-                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+                         <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                         <polyline points="2 17 12 22 22 17"></polyline>
+                         <polyline points="2 12 12 17 22 12"></polyline></svg>
                          <span>Empaquetamiento</span>
                      </div>
                      <div>
@@ -187,7 +191,61 @@
                      </li>
                  </ul>
              </li>
+             <li class="menu {{ request()->is('distribucion/*') ? 'active' : '' }}">
+                 <a href="#starter-kit" data-toggle="collapse" aria-expanded="{{ request()->is('distribucion/*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                     <div class="">
+                        <svg xmlns=" http://www.w3.org/2000/svg" width="24"
+                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal">
+                         <polyline points="4 17 10 11 4 5"></polyline>
+                         <line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                         <span>Distribución</span>
+                     </div>
+                     <div>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-chevron-right">
+                             <polyline points="9 18 15 12 9 6"></polyline>
+                         </svg>
+                     </div>
+                 </a>
+                 <ul class="collapse submenu {{ request()->is('distribucion/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled" id="starter-kit" data-parent="#accordionExample">
+                     <li class="{{ request()->is('distribucion/list') ? 'active' : '' }}">
+                         <a href="{{ route('listDistribucion') }}"> Listado </a>
+                     </li>
+                     <li class="{{ request()->is('distribucion/create') ? 'active' : '' }}">
+                         <a href="{{ route('nuevaDistribucion') }}"> Nueva Distribución </a>
+                     </li>
+                 </ul>
+             </li>
+             <li class="menu">
+                 <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                     <div class="">
+                        <svg xmlns=" http://www.w3.org/2000/svg" width="24"
+                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                         <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                         <polyline points="13 2 13 9 20 9"></polyline></svg>
+                         <span>Entregados</span>
+                     </div>
+                     <div>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-chevron-right">
+                             <polyline points="9 18 15 12 9 6"></polyline>
+                         </svg>
+                     </div>
+                 </a>
+                 <ul class="collapse submenu list-unstyled" id="pages" data-parent="#accordionExample">
+                     <li>
+                         <a href="pages_helpdesk.html"> Marcar Entregas </a>
+                     </li>
+                     <li>
+                         <a href="pages_contact_us.html"> Reportar Entregas </a>
+                     </li>
 
+                 </ul>
+             </li>
              <li class="menu menu-heading">
                  <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -239,7 +297,8 @@
 
 
              <li class="menu {{ request()->is('reportes/*') ? 'active' : '' }}">
-                 <a href="#forms" data-toggle="collapse" aria-expanded="{{ request()->is('reportes/*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                 <a href="#forms" data-toggle="collapse"
+                     aria-expanded="{{ request()->is('reportes/*') ? 'true' : 'false' }}" class="dropdown-toggle">
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -256,7 +315,8 @@
                          </svg>
                      </div>
                  </a>
-                 <ul class="collapse submenu {{ request()->is('reportes/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled" id="forms" data-parent="#accordionExample">
+                 <ul class="collapse submenu {{ request()->is('reportes/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                     id="forms" data-parent="#accordionExample">
                      <li class="{{ request()->is('reportes/pedidos') ? 'active' : '' }}">
                          <a href="{{ route('reportes') }}"> Pedidos </a>
                      </li>
@@ -266,8 +326,7 @@
 
 
              <li class="menu">
-                 <a target="_blank" href="../../documentation/index.html" aria-expanded="false"
-                     class="dropdown-toggle">
+                 <a target="_blank" href="../../documentation/index.html" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

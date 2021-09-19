@@ -18,7 +18,6 @@
 <script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
 <script src="{{ asset('plugins/table/datatable/datatables.js') }}"></script>
 <script src="{{ asset('plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-
 @yield('scripts')
 <script>
     function showMessage(msg) {

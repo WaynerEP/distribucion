@@ -3,7 +3,7 @@
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/dt-global_style.css') }}">
-    <link href="{{ asset('assets/css/apps/invoice-list.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/apps/invoice-list.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/elements/alert.css') }}">
 @endsection
 
@@ -74,21 +74,12 @@
                                         <td><span class="inv-amount">$/.{{ number_format($pedido->monto, 2) }}</span>
                                         </td>
                                         <td>
-                                            @switch($pedido->estadoPedido)
-                                                @case(0)
-                                                    <span class="badge outline-badge-danger"> Cancelado </span>
-                                                @break
-                                                @case(1)
-                                                    <span class="badge outline-badge-primary"> Confirmado </span>
-                                                @break
-                                                @case(2)
-                                                    <span class="badge outline-badge-warning"> Pedido en Reparto
-                                                    </span>
-                                                @break
-                                                @default
-                                                    <span class="badge outline-badge-success"> Pedido Entregado </span>
+                                            @if ($pedido->estadoPedido == 0)
+                                                <span class="badge outline-badge-primary"> Confirmado </span>
+                                            @else
+                                                <span class="badge outline-badge-success"> Pedido Entregado </span>
 
-                                            @endswitch
+                                            @endif
                                         </td>
                                         <td>
                                             <div class="dropdown">
@@ -104,9 +95,17 @@
                                                     </svg>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                                                    <a class="dropdown-item action-edit"
-                                                        href="{{ route('editPedido', $pedido->idPedido) }}"><svg
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('previewPedidos', $pedido->idPedido) }}"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-framer">
+                                                            <path d="M5 16V9h14V2H5l14 14h-7m-7 0l7 7v-7m-7 0h7"></path>
+                                                        </svg> Ver</a>
+                                                    {{-- <a class="dropdown-item"
+                                                        href="{{ route('editPedido', $pedido->idPedido) }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                             class="feather feather-edit-3">
@@ -114,7 +113,7 @@
                                                             <path
                                                                 d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z">
                                                             </path>
-                                                        </svg>Editar Estado</a>
+                                                        </svg>Editar Estado</a> --}}
                                                 </div>
                                             </div>
                                         </td>

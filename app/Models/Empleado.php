@@ -13,13 +13,14 @@ class Empleado extends Model
     protected $fillable = [
         'emailCorporativo',
         'telefono',
-        'dni'
+        'dni',
+        'estado',
     ];
     public $timestamps = false;
 
 
-    public function ciudadadano()
+    public function ciudadano()
     {
-        return $this->hasOne(Ciudadano::class, 'dni', 'dniCiudadano');
+        return $this->hasOne(Ciudadano::class, 'dni', 'dni');
     }
 }

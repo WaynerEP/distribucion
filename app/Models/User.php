@@ -26,7 +26,9 @@ class User extends Authenticatable
         'photo_profile',
         'email',
         'password',
-        'idGrupo'
+        'idGrupo',
+        'estado',
+        'dniCiudadano'
     ];
 
     /**

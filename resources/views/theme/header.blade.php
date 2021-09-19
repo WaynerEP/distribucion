@@ -147,7 +147,7 @@
             <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}"
                 alt="{{ Auth()->user()->name }}">
         @else
-            <img src="assets/img/90x90.jpg" alt="{{ Auth()->user()->name }}">
+            <img src="{{ asset('assets/img/90x90.jpg') }}" alt="{{ Auth()->user()->name }}">
         @endif
     </a>
     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
@@ -157,7 +157,7 @@
                     <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}" class="img-fluid mr-2"
                         alt="{{ Auth()->user()->name }}">
                 @else
-                    <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="{{ Auth()->user()->name }}">
+                    <img src="{{ asset('assets/img/90x90.jpg') }}" class="img-fluid mr-2" alt="{{ Auth()->user()->name }}">
                 @endif
                 <div class="media-body">
                     <h5>{{ Auth()->user()->name }}</h5>

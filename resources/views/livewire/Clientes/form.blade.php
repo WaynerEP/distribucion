@@ -3,6 +3,7 @@
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">{{ $title ? 'Editar Cliente' : 'Nuevo Cliente' }}
                 </h5>
@@ -18,49 +19,32 @@
             </div>
             <div class="modal-body">
                 <div class="form-row mb-4">
-                    <div class="form-group col-md-4">
-                        <label for="dni">DNI</label>
-                        <input wire:model="dni" type="text" class="form-control form-control-sm" id="dni"
-                            placeholder="Ingrese dni">
+                    <div class="form-group col-md-12">
+                        <label for="person">PERSONA</label>
+                        <select wire:model="SelectedCliente" class="form-control  basic" {{ $title ? 'disabled' : '' }}>
+                            <option value="">Seleccione....</option>
+                            @foreach ($ciudadanos as $c)
+                                <option value="{{ $c->dni }}">{{ $c->nombre }} {{ $c->aPaterno }}
+                                    {{ $c->aMaterno }}</option>
+                            @endforeach
+                        </select>
                         @error('dni')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
                             </div>
                         @enderror
+
                     </div>
                 </div>
                 <div class="form-row mb-4">
-                    <div class="form-group col-md-4">
-                        <label for="depa">Departamentos</label>
-                        <select wire:model="SelectedDepa" id="depa" class="form-control form-control-sm">
-                            <option value="">Seleccione...</option>
-                            @foreach ($departamentos as $depa)
-                                <option value="{{ $depa->idDepa }}">{{ $depa->departamento }}</option>
-                            @endforeach
+                    <div class="form-group col-md-6">
+                        <label for="state">ESTADO</label>
+                        <select wire:model="estado" id="state" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option value="1">Activo</option>
+                            <option Value="0">Inactivo</option>
                         </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="provincia">Provincias</label>
-                        <select wire:model="SelectedProv" id="provincia" class="form-control form-control-sm">
-                            <option value="">Seleccione...</option>
-                            @if (!is_null($provincias))
-                                @foreach ($provincias as $prov)
-                                    <option value="{{ $prov->idProvincia }}">{{ $prov->provincia }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="dist">Distritos</label>
-                        <select wire:model="SelectedDist" id="dist" class="form-control form-control-sm">
-                            <option value="">Seleccione...</option>
-                            @if (!is_null($distritos))
-                                @foreach ($distritos as $dist)
-                                    <option value="{{ $dist->idDistrito }}">{{ $dist->distrito }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        @error('SelectedDist')
+                        @error('estado')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
                             </div>
@@ -68,19 +52,20 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button class="btn" wire:click="resetUI" data-dismiss="modal"><i
                         class="flaticon-cancel-12"></i>
                     Cancelar</button>
                 @if ($title)
-                    <button type="button" wire:click="Update()" class="btn btn-info">
-                        <span wire:loading wire:target="Update"
+                    <button type="button" wire:click="update()" class="btn btn-info">
+                        <span wire:loading wire:target="update"
                             class="spinner-border text-white mr-2 align-self-center loader-sm ">Loading...</span>
                         Actualizar</button>
                 @else
 
-                    <button type="button" wire:click="Store()" class="btn btn-primary">
-                        <svg wire:loading wire:target="Store" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    <button type="button" wire:click="store()" class="btn btn-primary">
+                        <svg wire:loading wire:target="store" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin mr-2">
                             <line x1="12" y1="2" x2="12" y2="6"></line>
