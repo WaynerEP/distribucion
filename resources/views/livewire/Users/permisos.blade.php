@@ -147,7 +147,7 @@
             swal({
                 title: 'CONFIRMAR',
                 type: 'warning',
-                text: "Estás seguro de eliminar este rol!",
+                text: "Estás seguro de eliminar este Permiso!",
                 showCancelButton: true,
                 confirmButtonText: 'Eliminar',
                 confirmButtonColor: '#3b3f5c',
