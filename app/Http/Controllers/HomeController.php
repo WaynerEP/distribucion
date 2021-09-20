@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products = DB::select('call productosMax');
+        $caseritos = DB::select('call caseritos');
+        $pedidos = DB::select('select*from v_pedidosByCategoria');
+        return view('home', ['products' => $products, 'caseritos' => $caseritos, 'pedidos' => $pedidos]);
     }
 }
