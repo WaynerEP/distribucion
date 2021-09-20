@@ -71,5 +71,6 @@ class PedidosEntregadosController extends Component
     public function resetUI()
     {
         $this->reset('idPedido', 'idDistribucion', 'idRepartidor', 'image', 'nota', 'monto');
+        $this->resetValidation();
     }
 }
