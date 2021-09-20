@@ -57,7 +57,7 @@
 
                                         {{-- <td>{{ $d->encargado }} </td> --}}
                                         <td class="text-center">
-                                            <a href="{{ url('listPedidos/' . $d->idDistribucion . '/show') }}"
+                                            <a href="{{ url('listPedidos/' . $d->idListaPedidos . '/show') }}"
                                                 class="btn btn-outline-primary btn-sm">Detalle</a>
                                         </td>
                                     </tr>

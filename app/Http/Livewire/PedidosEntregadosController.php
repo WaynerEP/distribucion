@@ -54,7 +54,7 @@ class PedidosEntregadosController extends Component
         $customFileName = uniqid() . '_.' . $this->image->extension();
         $this->image->storeAs('public/entregas', $customFileName);
 
-        $entrega = EntregaDistribucion::create([
+        EntregaDistribucion::create([
             'idDistribucion' => $this->idDistribucion,
             'idPedido' => $this->idPedido,
             'idRepartidor' => $this->idRepartidor,

@@ -39,12 +39,12 @@
                          <circle cx="12" cy="12" r="10"></circle>
                      </svg><span>MANTENEDOR</span></div>
              </li>
-
+             @role('Administrador')
              <li class="menu {{ request()->is('users/*') ? 'active' : '' }}">
                  <a href="#users" data-toggle="collapse"
                      aria-expanded="{{ request()->is('users/*') ? 'true' : 'false' }}" class="dropdown-toggle">
                      <div class="">
-                     <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24"
+                    <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                          stroke-linejoin="round" class="feather feather-users">
                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -74,6 +74,8 @@
                      </li>
                  </ul>
              </li>
+             @endrole
+
              <li class="menu {{ request()->is('modules/*') ? 'active' : '' }}">
                  <a href="#elements" data-toggle="collapse"
                      aria-expanded="{{ request()->is('modules/*') ? 'true' : 'false' }}" class="dropdown-toggle">
@@ -110,12 +112,14 @@
                      <li class="{{ request()->is('modules/zonas') ? 'active' : '' }}">
                          <a href="{{ route('zonas') }}"> Zonas </a>
                      </li>
+                     @role('Administrador')
                      <li class="{{ request()->is('modules/ciudadanos') ? 'active' : '' }}">
                          <a href="{{ route('ciudadanos') }}"> Ciudadanos </a>
                      </li>
                      <li class="{{ request()->is('modules/empleados') ? 'active' : '' }}">
                          <a href="{{ route('empleados') }}"> Empleados </a>
                      </li>
+                     @endrole
                      <li class="{{ request()->is('modules/transporte') ? 'active' : '' }}">
                          <a href="{{ route('transporte') }}"> Transporte </a>
                      </li>
@@ -131,36 +135,37 @@
                      </svg><span>PROCESOS</span></div>
              </li>
 
-             <li class="menu {{ request()->is('pedidos/*') ? 'active' : '' }}">
-                 <a href="#invoice" data-toggle="collapse"
-                     aria-expanded="{{ request()->is('pedidos/*') ? 'true' : 'false' }}" class="dropdown-toggle">
-                     <div class="">
-                        <svg xmlns=" http://www.w3.org/2000/svg" width="24"
-                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
-                         <line x1="12" y1="1" x2="12" y2="23"></line>
-                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                         <span>Pedidos</span>
-                     </div>
-                     <div>
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-chevron-right">
-                             <polyline points="9 18 15 12 9 6"></polyline>
-                         </svg>
-                     </div>
-                 </a>
-                 <ul class="collapse submenu {{ request()->is('pedidos/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
-                     id="invoice" data-parent="#accordionExample">
-                     <li class="{{ request()->is('pedidos/list') ? 'active' : '' }}">
-                         <a href="{{ route('listPedidos') }}"> Listado </a>
-                     </li>
-                     <li class="{{ request()->is('pedidos/create') ? 'active' : '' }}">
-                         <a href="{{ route('createPedidos') }}"> Registrar </a>
-                     </li>
-                 </ul>
-             </li>
-
+             @can('Realizar-Pedidos')
+                 <li class="menu {{ request()->is('pedidos/*') ? 'active' : '' }}">
+                     <a href="#invoice" data-toggle="collapse"
+                         aria-expanded="{{ request()->is('pedidos/*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                         <div class="">
+                       <svg xmlns=" http://www.w3.org/2000/svg" width="24"
+                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                             <line x1="12" y1="1" x2="12" y2="23"></line>
+                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                             <span>Pedidos</span>
+                         </div>
+                         <div>
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                 <polyline points="9 18 15 12 9 6"></polyline>
+                             </svg>
+                         </div>
+                     </a>
+                     <ul class="collapse submenu {{ request()->is('pedidos/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                         id="invoice" data-parent="#accordionExample">
+                         <li class="{{ request()->is('pedidos/list') ? 'active' : '' }}">
+                             <a href="{{ route('listPedidos') }}"> Listado </a>
+                         </li>
+                         <li class="{{ request()->is('pedidos/create') ? 'active' : '' }}">
+                             <a href="{{ route('createPedidos') }}"> Registrar </a>
+                         </li>
+                     </ul>
+                 </li>
+             @endcan
              <li class="menu {{ request()->is('listPedidos/*') ? 'active' : '' }}">
                  <a href="#components" data-toggle="collapse"
                      aria-expanded="{{ request()->is('listPedidos/*') ? 'true' : 'false' }}" class="dropdown-toggle">
@@ -183,47 +188,58 @@
                  </a>
                  <ul class="collapse submenu {{ request()->is('listPedidos/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
                      id="components" data-parent="#accordionExample">
-                     <li class="{{ request()->is('listPedidos/list') ? 'active' : '' }}">
-                         <a href="{{ route('listOrder') }}"> Listado </a>
-                     </li>
-                     <li class="{{ request()->is('listPedidos/create') ? 'active' : '' }}">
-                         <a href="{{ route('createListOrder') }}"> Registrar </a>
-                     </li>
+                     @can('ListasPedidos-Show')
+
+                         <li class="{{ request()->is('listPedidos/list') ? 'active' : '' }}">
+                             <a href="{{ route('listOrder') }}"> Listado </a>
+                         </li>
+                         <li class="{{ request()->is('listPedidos/create') ? 'active' : '' }}">
+                             <a href="{{ route('createListOrder') }}"> Registrar </a>
+                         </li>
+                     @endcan
+
+                     @role('Empaquetador')
                      <li class="{{ request()->is('listPedidos/state') ? 'active' : '' }}">
                          <a href="{{ route('changeState') }}"> Marcar Estado </a>
                      </li>
+                     @endrole
+
                  </ul>
              </li>
-             <li class="menu {{ request()->is('distribucion/*') ? 'active' : '' }}">
-                 <a href="#starter-kit" data-toggle="collapse"
-                     aria-expanded="{{ request()->is('distribucion/*') ? 'true' : 'false' }}"
-                     class="dropdown-toggle">
-                     <div class="">
+
+             @can('Distribuciones-List')
+                 <li class="menu {{ request()->is('distribucion/*') ? 'active' : '' }}">
+                     <a href="#starter-kit" data-toggle="collapse"
+                         aria-expanded="{{ request()->is('distribucion/*') ? 'true' : 'false' }}"
+                         class="dropdown-toggle">
+                         <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
-                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal">
-                         <polyline points="4 17 10 11 4 5"></polyline>
-                         <line x1="12" y1="19" x2="20" y2="19"></line></svg>
-                         <span>Distribución</span>
-                     </div>
-                     <div>
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-chevron-right">
-                             <polyline points="9 18 15 12 9 6"></polyline>
-                         </svg>
-                     </div>
-                 </a>
-                 <ul class="collapse submenu {{ request()->is('distribucion/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
-                     id="starter-kit" data-parent="#accordionExample">
-                     <li class="{{ request()->is('distribucion/list') ? 'active' : '' }}">
-                         <a href="{{ route('listDistribucion') }}"> Listado </a>
-                     </li>
-                     <li class="{{ request()->is('distribucion/create') ? 'active' : '' }}">
-                         <a href="{{ route('nuevaDistribucion') }}"> Nueva Distribución </a>
-                     </li>
-                 </ul>
-             </li>
+                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal">
+                             <polyline points="4 17 10 11 4 5"></polyline>
+                             <line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                             <span>Distribución</span>
+                         </div>
+                         <div>
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                 <polyline points="9 18 15 12 9 6"></polyline>
+                             </svg>
+                         </div>
+                     </a>
+                     <ul class="collapse submenu {{ request()->is('distribucion/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                         id="starter-kit" data-parent="#accordionExample">
+                         <li class="{{ request()->is('distribucion/list') ? 'active' : '' }}">
+                             <a href="{{ route('listDistribucion') }}"> Listado </a>
+                         </li>
+                         <li class="{{ request()->is('distribucion/create') ? 'active' : '' }}">
+                             <a href="{{ route('nuevaDistribucion') }}"> Nueva Distribución </a>
+                         </li>
+                     </ul>
+                 </li>
+             @endcan
+             @role('Distribuidor')
              <li class="menu {{ request()->is('entregar/*') ? 'active' : '' }}">
                  <a href="#pages" data-toggle="collapse"
                      aria-expanded="{{ request()->is('entregar/*') ? 'true' : 'false' }}" class="dropdown-toggle">
@@ -248,11 +264,9 @@
                      <li class="{{ request()->is('entregar/marcar') ? 'active' : '' }}">
                          <a href="{{ route('marcarEntrega') }}"> Marcar Entregas </a>
                      </li>
-                     {{-- <li>
-                         <a href="pages_contact_us.html"> Reportar Entregas </a>
-                     </li> --}}
                  </ul>
              </li>
+             @endrole
              <li class="menu menu-heading">
                  <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -333,7 +347,7 @@
 
 
              <li class="menu">
-                 <a target="_blank" href="../../documentation/index.html" aria-expanded="false" class="dropdown-toggle">
+                 <a target="_blank" href="https://1drv.ms/b/s!Am1G11vTb5AlgYgOTCBgYfQgUjoQJg?e=bOYAkq" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

@@ -54,10 +54,10 @@
                                             <div class="invoice-actions-btn">
                                                 <div class="invoice-action-btn">
                                                     <div class="row">
-                                                        <div class="col-xl-12 col-md-4">
+                                                        {{-- <div class="col-xl-12 col-md-4">
                                                             <a href="javascript:void(0);" wire:click="$refresh"
                                                                 class=" btn btn-primary btn-send">CONSULTAR</a>
-                                                        </div>
+                                                        </div> --}}
 
                                                         <div class="col-xl-12 col-md-4">
                                                             <a href="  {{ url('/reportes/pdf/' . $idempleado . '/' . $tipoReporte . '/' . $date1 . '/' . $date2) }} "

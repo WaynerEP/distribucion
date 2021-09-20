@@ -69,6 +69,7 @@
                             @endif
                             <div class="media-body">
                                 <h5>{{ Auth()->user()->name }}</h5>
+                                <p>{{ Auth()->user()->getRoleNames()[0]}}</p>
                             </div>
                         </div>
                     </div>
