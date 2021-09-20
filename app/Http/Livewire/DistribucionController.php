@@ -9,6 +9,8 @@ use App\Models\Zona;
 use App\Models\Transporte;
 use App\Models\Empleado;
 use App\Models\DetallePedido;
+use App\Models\Distribucion;
+use App\Models\DistribucionTransporte;
 
 use Carbon\Carbon;
 use DB;
@@ -20,10 +22,11 @@ class DistribucionController extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $pagination = 8, $idZona, $zona, $distrito, $idListaPedidos,
-        $idTransporte, $transporte, $idConductor, $SelectedConductor, $email, $telefono;
-    public $montoAsignado, $montoCombustible;
+    public $pagination = 8,  $zona, $distrito,
+        $idTransporte, $transporte, $idConductor, $SelectedConductor, $SelectedEncargado, $email, $telefono;
+    public $idZona, $idListaPedidos, $idEncargado, $montoAsignado, $montoCombustible;
     public $search, $searchTransporte, $listaPedidos, $detailsProducts, $detailPedidos, $sumDetails;
+
 
 
     public function render()
@@ -38,8 +41,9 @@ class DistribucionController extends Component
             ->where('estado', '=', '1')
             ->paginate($this->pagination);
         $conductores = DB::select('call sp_conductores');
-        $pedidos = DB::select('call sp_ListasPedidos');
-        return view('livewire.Distribucion.indexDistribucion', ['zonas' => $zonas, 'data' => $data, 'conductores' => $conductores, 'pedidos' => $pedidos])
+        $encargados = DB::select('call sp_encargados');
+        $pedidos = DB::select('call pedidosListos');
+        return view('livewire.Distribucion.indexDistribucion', ['zonas' => $zonas, 'data' => $data, 'conductores' => $conductores, 'encargados' => $encargados, 'pedidos' => $pedidos])
             ->extends('layouts.app')
             ->section('content');;
     }
@@ -66,6 +70,7 @@ class DistribucionController extends Component
         $this->idZona = $id;
         $this->zona = $nameZona;
         $this->distrito = $distrito;
+        $this->resetValidation('idZona');
         $this->emit('closeModalZona', 'show-modal!');
     }
 
@@ -75,6 +80,7 @@ class DistribucionController extends Component
     {
         $this->idTransporte = $id;
         $this->transporte = 'Matr. ' . $marca . ' - Cap.' . $capacidad . ' kg';
+        $this->resetValidation('idTransporte');
         $this->emit('closeModalTransporte', 'show-modal');
     }
 
@@ -83,19 +89,67 @@ class DistribucionController extends Component
     public function updatedSelectedConductor($id)
     {
         $conductor = Empleado::find($id);
-        $this->idConductor = $conductor->id;
+        $this->idConductor = $conductor->idEmpleado;
         $this->email = $conductor->emailCorporativo;
         $this->telefono = $conductor->telefono;
+        $this->resetValidation('idConductor');
+    }
+
+    public function updatedSelectedEncargado($value)
+    {
+        $this->idEncargado = $value;
+        $this->resetValidation('idEncargado');
     }
 
 
-    public function addLista($id, $name, $n)
+    public function addLista($id, $name)
     {
         $this->idListaPedidos = $id;
-        $this->listaPedidos = $name . ' - ' . $n . ' pedidos';
+        $this->listaPedidos = $name;
+        $this->resetValidation('idListaPedidos');
         $this->emit('closeModalPedidos', 'show-modal');
     }
 
+
+    public function store()
+    {
+        $this->validate(
+            [
+                'idZona' => 'required',
+                'idTransporte' => 'required',
+                'montoCombustible' => 'required',
+                'idConductor' => 'required',
+                'idListaPedidos' => 'required',
+                'idEncargado' => 'required',
+                'montoAsignado' => 'required',
+            ],
+            [
+                'idZona.required' => 'Seleccione una zona',
+                'idTransporte.required' => 'Seleccione un vehículo',
+                'montoCombustible.required' => 'Ingrese monto para combustible',
+                'idConductor.required' => 'Seleccione un conductor',
+                'idListaPedidos.required' => 'Seleccione una lista de Pedidos',
+                'idEncargado.required' => 'Seleccione el encargado para la distribución',
+                'montoAsignado.required' => 'Ingrese un monto',
+            ]
+        );
+        $data = Distribucion::create([
+            'idZona' => $this->idZona,
+            'idListaPedidos' => $this->idListaPedidos,
+            'idEncargado' => $this->idEncargado,
+            'montoAsignado' => $this->montoAsignado,
+        ]);
+
+        $idDistribucion = $data->idDistribucion;
+        DistribucionTransporte::create([
+            'idTransporte' => $this->idTransporte,
+            'idConductor' => $this->idConductor,
+            'idDistribucion' => $idDistribucion,
+            'montoCombustible' => $this->montoCombustible,
+        ]);
+        $this->resetUI();
+        $this->emit('order-stored', 'Loadind data');
+    }
 
 
     public function getDetailsProducts($id)
@@ -107,7 +161,7 @@ class DistribucionController extends Component
 
         $suma = $this->detailsProducts->sum(function ($item) {
 
-            return ($item->precio * $item->cantidadPedida)+(($item->precio * $item->cantidadPedida)*0.18);
+            return round((($item->precio * $item->cantidadPedida) - $item->descuento) + ((($item->precio * $item->cantidadPedida) - $item->descuento) * 0.18), 1);
         });
 
         $this->sumDetails = $suma;
@@ -116,10 +170,26 @@ class DistribucionController extends Component
     }
 
 
-
-    public function store() {
-        sleep(1);
-        $this->emit('order-stored', 'Loadind data');
-        
+    public function resetUI()
+    {
+        $this->detailPedidos = [];
+        $this->resetValidation();
+        $this->reset([
+            'idZona',
+            'idListaPedidos',
+            'listaPedidos',
+            'idEncargado',
+            'montoAsignado',
+            'montoCombustible',
+            'zona',
+            'idTransporte',
+            'transporte',
+            'distrito',
+            'idConductor',
+            'SelectedEncargado',
+            'SelectedConductor',
+            'email',
+            'telefono',
+        ]);
     }
 }

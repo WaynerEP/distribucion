@@ -66,7 +66,7 @@
                             @endif
                             <tr>
                                 <td class="text-right text-primary" colspan="5">
-                                    <h5>Total:</h5>
+                                    <h5>Total + Igv:</h5>
                                 </td>
                                 <td class="text-rigth text-primary"> {{ number_format($sumDetails, 2) }}</td>
                             </tr>

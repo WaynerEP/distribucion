@@ -124,7 +124,7 @@ class empleadosController extends Component
 
     public function resetUI()
     {
-        $this->reset('dni',  'title', 'search', 'selected_id', 'SelectedEmpleado', 'estado', 'telefono');
+        $this->reset('dni',  'title', 'search', 'selected_id', 'SelectedEmpleado', 'estado', 'telefono','email');
         $this->resetValidation();
     }
 }

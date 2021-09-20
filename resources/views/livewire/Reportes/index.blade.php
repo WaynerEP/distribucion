@@ -23,8 +23,7 @@
                                                     <option value="0">Todos</option>
                                                     @foreach ($empleados as $empleado)
                                                         <option value="{{ $empleado->idEmpleado }}">
-                                                            {{ $empleado->nombre }}
-                                                            {{ $empleado->aPaterno }} {{ $empleado->aMaterno }}
+                                                            {{ $empleado->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -33,8 +32,8 @@
                                                 <label for="company-email" class="my-2">TIPO DE
                                                     REPORTE</label>
                                                 <select id="tipoR" wire:model="tipoReporte" class="form-control">
-                                                    <option value="0">Ventas del dia</option>
-                                                    <option value="1">Ventas por Fecha</option>
+                                                    <option value="0">Pedidos del dia</option>
+                                                    <option value="1">Pedidos por Fecha</option>
 
                                                 </select>
                                             </div>
@@ -85,9 +84,9 @@
                 <div class="col-xl-8">
                     <div class="invoice-actions">
                         <div class="widget-content widget-content-area">
-                            <div class="table-responsive">
-                                <table class="table mb-4" style="max-height: 450px; overflow: scroll;">
-                                    <thead>
+                            <div class="table-responsive bg-white" style="max-height: 600px; overflow: auto;">
+                                <table class="table mb-4 bg-white">
+                                    <thead class="sticky-top bg-white">
                                         <tr>
                                             <th class="text-center">#</th>
                                             <th>TOTAL</th>

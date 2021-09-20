@@ -17,16 +17,17 @@ class reportesController extends Component
     public function render()
     {
         $this->OrderByDate();
-        $empleados = DB::table('empleado as e')
-            ->join('ciudadano as c', 'e.dni', '=', 'c.dni')
-            ->select('e.idEmpleado', 'c.nombre', 'c.aPaterno', 'c.aMaterno')
-            ->orderBy('c.nombre', 'asc')
-            ->get();
+        $empleados = DB::select('call sp_getVendedores');
         return view('livewire.Reportes.index', ['empleados' => $empleados])
             ->extends('layouts.app')
             ->section('content');
     }
 
+    // $empleados = DB::table('empleado as e')
+    //         ->join('ciudadano as c', 'e.dni', '=', 'c.dni')
+    //         ->select('e.idEmpleado', 'c.nombre', 'c.aPaterno', 'c.aMaterno')
+    //         ->orderBy('c.nombre', 'asc')
+    //         ->get();
     public function mount()
     {
         $this->data = [];
@@ -68,8 +69,7 @@ class reportesController extends Component
             ->get();
 
         $suma = $this->detailsProducts->sum(function ($item) {
-            return ($item->precio * $item->cantidadPedida)+(($item->precio * $item->cantidadPedida)*0.18);
-
+            return ($item->precio * $item->cantidadPedida) + (($item->precio * $item->cantidadPedida) * 0.18);
         });
 
         $this->sumDetails = $suma;

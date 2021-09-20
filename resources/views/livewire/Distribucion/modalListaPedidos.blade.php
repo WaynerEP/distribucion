@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div wire:ignore.self class="modal fade" id="modalPedido" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Lista Diaria</h5>
@@ -15,11 +15,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{-- <div class="row">
-                    <div class="col-sm-6">
-                        @include('Search')
-                    </div>
-                </div> --}}
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head"
                         style="width: 100%;">
@@ -35,11 +30,11 @@
                             @if (count($pedidos) > 0)
                                 @foreach ($pedidos as $z)
                                     <tr style="cursor: pointer;"
-                                        wire:click="addLista({{ $z->idListaPedidos }},'{{ $z->nombre }}','{{ $z->nPedido }}')">
+                                        wire:click="addLista({{ $z->idListaPedidos }},'{{ $z->nombre }}')">
                                         <td class="text-primary">{{ $z->idListaPedidos }}</td>
                                         <td>📑 {{ $z->nombre }}</td>
                                         <td>{{ $z->fecha }}</td>
-                                        <td>{{ $z->nPedido }}</td>
+                                        <td><span class="badge badge-success"> Pedidos Listos </span></td>
                                     </tr>
                                 @endforeach
                             @else

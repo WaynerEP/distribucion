@@ -57,10 +57,10 @@ Route::get('/pedidos/{id}/edit', editPedido::class)->name('editPedido')->middlew
 Route::get('/reportes/pedidos', ReportesController::class)->name('reportes')->middleware('auth');
 //pdf
 Route::get('/reportes/pdf/{empleado}/{type}/{f1}/{f2}',  [App\Http\Controllers\reportesController::class, 'reportPDF']);
-// Route::get('/reportes/pdf/{empleado}/{type}',  [App\Http\Controllers\reportesController::class, 'reportPDF']);
+Route::get('/reportes/pdf/{empleado}/{type}',  [App\Http\Controllers\reportesController::class, 'reportPDF']);
 //excel
 Route::get('/reportes/excel/{empleado}/{type}/{f1}/{f2}',  [App\Http\Controllers\reportesController::class, 'reportEXCEL']);
-// Route::get('/reportes/excel/{empleado}/{type}',  [App\Http\Controllers\reportesController::class, 'reportEXCEL']);
+Route::get('/reportes/excel/{empleado}/{type}',  [App\Http\Controllers\reportesController::class, 'reportEXCEL']);
 
 // Route::get('/email', function () {
 //     return view('Email.sendEmail');

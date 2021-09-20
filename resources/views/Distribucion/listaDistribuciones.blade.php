@@ -18,22 +18,25 @@
                 <div id="invoice-list_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                     <div class="table-responsive">
                         <table id="html5-extension" class="table table-hover" style="width: 100%;">
-                            <thead>
+                            <thead class="table-secondary">
                                 <tr>
                                     <th>#</th>
-                                    <th>CONDUCTOR</th>
-                                    <th>FECHA</th>
                                     <th>VEHÍCULO</th>
-                                    <th>ZONA</th>
-                                    <th>ENCARGADO</th>
+                                    <th>TRANSPORTISTA</th>
+                                    <th>FECHA</th>
+                                    <th>ZONA DE REPARTO</th>
+                                    <th>LISTA</th>
                                     <th>ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $d)
                                     <tr>
-                                        <td>{{ $d->idDistribucion }}</span></a>
-                                        </td>
+                                        <td>{{ $d->idDistribucion }} </td>
+                                        <td><img class="img-fluid w-25"
+                                                src="https://volca.com/wp-content/uploads/2019/11/terrestre.png"
+                                                alt="Vehiculo">
+                                            Matr. {{ $d->vehiculo }} </td>
                                         <td>{{ $d->conductor }}</td>
 
                                         <td>
@@ -45,16 +48,17 @@
                                                     <line x1="16" y1="2" x2="16" y2="6"></line>
                                                     <line x1="8" y1="2" x2="8" y2="6"></line>
                                                     <line x1="3" y1="10" x2="21" y2="10"></line>
-                                                </svg> {{ $d->fecha }}</span></td>
-                                        <td>
-                                            {{ $d->nombreLista }}
+                                                </svg> {{ $d->fecha }}</span>
                                         </td>
-                                        <td>{{ $d->vehiculo }} </td>
-                                        <td>{{ $d->zona }} </td>
-                                        <td>{{ $d->encargado }} </td>
+                                        <td> <img class="img-fluid w-25"
+                                                src="https://www.barragrau.pe/wp-content/uploads/2015/10/zonasreparto1.png"
+                                                alt="">{{ $d->zona }} </td>
+                                        <td> {{ $d->nombreLista }} </td>
+
+                                        {{-- <td>{{ $d->encargado }} </td> --}}
                                         <td class="text-center">
                                             <a href="{{ url('listPedidos/' . $d->idDistribucion . '/show') }}"
-                                                class="btn btn-outline-primary btn-sm">Ver Detalle</a>
+                                                class="btn btn-outline-primary btn-sm">Detalle</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -97,7 +101,7 @@
                         text: 'Nuevo Registro',
                         className: 'btn btn-sm',
                         action: function(e, dt, node, config) {
-                            window.location = 'asignarDistribucion';
+                            window.location = 'create';
                         }
                     }
                 ]

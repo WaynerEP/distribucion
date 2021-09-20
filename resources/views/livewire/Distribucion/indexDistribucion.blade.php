@@ -22,7 +22,9 @@
             {{ \Carbon\Carbon::now()->format('j F, Y') }}
         </div>
         <div>
-            <button class="btn btn-primary btn-sm" wire:click="store">
+            <button class="btn btn-dark" wire:click="resetUI()">
+                Resetear</button>
+            <button class="btn btn-primary" wire:click="store">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="feather feather-truck mr-2">
@@ -53,6 +55,11 @@
                             </svg>
                         </button>
                     </div>
+                    @error('idZona')
+                        <div class="invalid-feedback d-block" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-row mb-4">
                     <div class="form-group col-md-12">
@@ -79,11 +86,22 @@
                             </svg>
                         </button>
                     </div>
+                    @error('idTransporte')
+                        <div class="invalid-feedback d-block" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-row mb-4">
                     <div class="form-group col-md-12">
                         <label for="comb" class="text-primary">Monto Combust.</label>
-                        <input type="text" class="form-control" id="comb" placeholder="Mto Combustible...">
+                        <input type="text" wire:model.defer="montoCombustible" class="form-control" id="comb"
+                            placeholder="Mto Combustible...">
+                        @error('montoCombustible')
+                            <div class="invalid-feedback d-block" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <label for="transportista" class="text-primary">Transportista</label>
@@ -106,6 +124,11 @@
                             </svg>
                         </button>
                     </div>
+                    @error('idConductor')
+                        <div class="invalid-feedback d-block" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-row mb-4">
@@ -130,8 +153,8 @@
             <div class="widget-content widget-content-area">
                 <label for="" class="text-primary">Lista de Pedidos</label>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Seleccione una lista de Pedidos..."
-                        aria-label="notification">
+                    <input type="text" wire:model="listaPedidos" class="form-control"
+                        placeholder="Seleccione una lista de Pedidos..." aria-label="notification">
                     <div class="input-group-append">
                         <button type="button" class="input-group-text" data-toggle="modal" data-target="#modalPedido">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -143,12 +166,36 @@
                             </svg>
                         </button>
                     </div>
+                    @error('idListaPedidos')
+                        <div class="invalid-feedback d-block" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-row mb-2">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="encargado" class="text-primary">Responsable del Pedido</label>
+                        <select id="encargado" wire:model="SelectedEncargado" class="form-control">
+                            <option value="">Seleccione...</option>
+                            @foreach ($encargados as $e)
+                                <option value="{{ $e->idEmpleado }}">👨‍💼 {{ $e->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('idEncargado')
+                            <div class="invalid-feedback d-block" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="montoasig" class="text-primary">Monto Asignado</label>
-                        <input type="text" wire:model="montoAsignado" class="form-control" id="montoasig"
-                            placeholder="Monto asigando...">
+                        <input type="text" wire:model.defer="montoAsignado" class="form-control" id="montoasig"
+                            placeholder="Asignar un monto...">
+                        @error('montoAsignado')
+                            <div class="invalid-feedback d-block" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <label for="detail" class="text-primary">Detalle <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -161,7 +208,7 @@
                 <div class="table-responsive table-bordered table-hover table-striped"
                     style="max-height: 360px; overflow: auto;">
                     <table class="table table-bordered item-table">
-                        <thead>
+                        <thead class="sticky-top bg-white">
                             <tr>
                                 <th>#</th>
                                 <th>PEDIDO</th>
