@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-4 text-right align-items-center my-auto">
-                        <div class="btn-group dropleft mr-2" role="group">
+                        {{-- <div class="btn-group dropleft mr-2" role="group">
                             <button id="btnDropLeft" type="button" class="btn btn-danger dropdown-toggle"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -39,7 +39,7 @@
                                 <a href="javascript:void(0);" class="dropdown-item">Formato PDF</a>
                                 <a href="javascript:void(0);" class="dropdown-item">Formato Excel</a>
                             </div>
-                        </div>
+                        </div> --}}
                         <button class="btn btn-primary" wire:click="resetUI" data-toggle="modal"
                             data-target="#ProductModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="statbox widget box box-shadow">
-                    {{--  <div class="widget-header">
+                    {{-- <div class="widget-header">
                         <div class="row px-3 pt-3">
                             <div class="col-12">
                                 <div class="form-group row mb-4">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  --}}
+                    </div> --}}
                     <div class="widget-content widget-content-area">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-4">
@@ -108,7 +108,7 @@
                                                 </td>
                                                 <td>{{ $product->categoria }}</td>
                                                 <td>{{ $product->cantidad }}</td>
-                                                <td>S/. {{ number_format($product->precio,2) }}</td>
+                                                <td>S/. {{ number_format($product->precio, 2) }}</td>
                                                 <td class=" text-center">
                                                     <ul class="table-controls">
                                                         <li><a wire:click="Edit('{{ $product->idProducto }}')"
@@ -170,7 +170,7 @@
 
 
 @section('scripts')
-    <script src="plugins/dropify/dropify.min.js"></script>
+    <script src="{{ asset('plugins/dropify/dropify.min.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

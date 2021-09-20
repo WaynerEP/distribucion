@@ -24,7 +24,7 @@ class empleadosController extends Component
     {
         $data = DB::table('empleado as l')
             ->join('ciudadano as c', 'l.dni', '=', 'c.dni')
-            ->select('l.idEmpleado', 'c.nombre', 'c.aPaterno', 'c.aMaterno', 'l.emailCorporativo', 'c.direccion', 'l.telefono', 'l.estado')
+            ->select('l.idEmpleado', 'c.nombre','c.dni', 'c.aPaterno', 'c.aMaterno', 'l.emailCorporativo', 'c.direccion', 'l.telefono', 'l.estado')
             ->where('c.nombre', 'LIKE', "%$this->search%")
             ->orderBy('l.idEmpleado', 'desc')->paginate($this->pagination);
         $this->ciudadanos = DB::table('ciudadano as c')

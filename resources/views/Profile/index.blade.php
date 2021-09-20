@@ -25,10 +25,10 @@
                     </div>
                     <div class="text-center user-info">
                         @if (Auth()->user()->photo_profile)
-                            <img src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}"
+                            <img class="img-fluid w-50" src="{{ asset('storage/profile/' . Auth()->user()->photo_profile) }}"
                                 alt="{{ Auth()->user()->name }}">
                         @else
-                            <img src="{{ asset('assets/img/90x90.jpg') }}" alt="{{ Auth()->user()->name }}">
+                            <img class="img-fluid w-25" src="{{ asset('assets/img/90x90.jpg') }}" alt="{{ Auth()->user()->name }}">
                         @endif
                         <p class="">{{ auth()->user()->name }}</p>
                     </div>

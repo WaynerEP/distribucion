@@ -44,6 +44,7 @@
                                 <th>#</th>
                                 <th>NOMBRES Y APELLIDOS</th>
                                 <th>EMAIL CORPORATIVO</th>
+                                <th>DNI</th>
                                 <th>TELEFONO</th>
                                 <th>ESTADO</th>
                                 <th>ACCIONES</th>
@@ -57,6 +58,7 @@
                                         <td class="text-primary">{{ $e->nombre }} {{ $e->aPaterno }}
                                             {{ $e->aMaterno }}</td>
                                         <td>{{ $e->emailCorporativo }}</td>
+                                        <td>{{ $e->dni }}</td>
                                         <td>{{ $e->telefono }}</td>
                                         <td class="text-center">
                                             @if (!$e->estado)

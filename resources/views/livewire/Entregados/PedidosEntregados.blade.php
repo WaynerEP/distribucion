@@ -1,5 +1,4 @@
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/switches.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/widgets/modules-widgets.css') }}">
 @endsection
 
@@ -25,16 +24,16 @@
                                         <div class="th-content">Pedido</div>
                                     </th>
                                     <th>
-                                        <div class="th-content th-heading">Fecha</div>
+                                        <div class="th-content th-heading">Fecha del Pedido</div>
                                     </th>
                                     <th>
-                                        <div class="th-content th-heading">Nro. Documento</div>
+                                        <div class="th-content th-heading">Cliente</div>
                                     </th>
                                     <th>
-                                        <div class="th-content">Cliente</div>
+                                        <div class="th-content th-heading">Dni Cliente</div>
                                     </th>
                                     <th>
-                                        <div class="th-content">Source</div>
+                                        <div class="th-content">Marcar</div>
                                     </th>
                                 </tr>
                             </thead>
@@ -43,34 +42,50 @@
                                     <tr>
                                         <td>
                                             <div class="td-content product-name">
-                                                <img src="{{ asset('assets/img/90x90.jpg') }}" alt="product">
+                                                @if ($d->image)
+                                                    <img src="{{ asset('storage/entregas/' . $d->image) }}"
+                                                        loading="lazy" alt="{{ $d->nombre }}">
+                                                @else
+                                                    <img src="{{ asset('assets/img/90x90.jpg') }}" loading="lazy"
+                                                        alt="product">
+                                                @endif
                                                 <div class="align-self-center">
-                                                    <p class="prd-name">Headphone</p>
-                                                    <p class="prd-category text-primary">Digital</p>
+                                                    <p class="prd-name">{{ $d->nDocumento }}</p>
+                                                    <p class="prd-category text-primary">Pedido
+                                                        {{ str_pad($d->idPedido, 4, '0', STR_PAD_LEFT) }}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="td-content"><span class="pricing">$168.09</span>
+                                            <div class="td-content"><span
+                                                    class="pricing">{{ $d->fecha }}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="td-content"><span class="discount-pricing">$60.09</span>
+                                            <div class="td-content"><span
+                                                    class="discount-pricing">{{ strtoupper($d->cliente) }}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="td-content">170</div>
+                                            <div class="td-content">{{ $d->dni }}</div>
                                         </td>
-                                        <td>
-                                            {{-- <div class="td-content"><span class="badge badge-success">Entregado al cliente</span></div> --}}
-                                            <div class="td-content"><a href="javascript:void(0);"
-                                                    class="text-primary"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-chevrons-right">
-                                                        <polyline points="13 17 18 12 13 7"></polyline>
-                                                        <polyline points="6 17 11 12 6 7"></polyline>
-                                                    </svg> Marcar entregado</a></div>
+                                        <td class="td-content">
+                                            @if ($d->estadoPedido)
+                                                <div class="td-content"><span class="badge badge-success">Entregado
+                                                        al cliente</span></div>
+                                            @else
+                                                <div class="td-content"><a
+                                                        wire:click="openModal({{ $d->idPedido }},{{ $d->idDistribucion }},{{ $d->idRepartidor }})"
+                                                        href="javascript:void(0);" class="text-primary"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="feather feather-chevrons-right">
+                                                            <polyline points="13 17 18 12 13 7"></polyline>
+                                                            <polyline points="6 17 11 12 6 7"></polyline>
+                                                        </svg> Marcar entregado</a></div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -78,6 +93,24 @@
                         </table>
                     </div>
             </div>
+
+            @include('Livewire.Entregados.modalEntregados')
         </div>
     </div>
 </div>
+
+@section('scripts')
+    <script src="{{ asset('plugins/dropify/dropify.min.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.livewire.on('show-modal', msg => {
+                $('#ProductModal').modal('show');
+            });
+            window.livewire.on('product-updated', msg => {
+                $('#ProductModal').modal('hide');
+                showMessage(msg);
+            });
+        });
+    </script>
+@endsection
