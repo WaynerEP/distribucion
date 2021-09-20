@@ -187,10 +187,37 @@
                             </div>
                         @enderror
                     </div>
+
                     <div class="form-group col-md-6">
-                        <label for="montoasig" class="text-primary">Monto Asignado</label>
-                        <input type="text" wire:model.defer="montoAsignado" class="form-control" id="montoasig"
-                            placeholder="Asignar un monto...">
+                        <label for="encargado" class="text-primary">Distribuidor</label>
+                        <select id="encargado" wire:model="SelectedDistribuidor" class="form-control">
+                            <option value="">Seleccione...</option>
+                            @foreach ($distribuidores as $d)
+                                <option value="{{ $d->idEmpleado }}">👨‍💼 {{ $d->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('idDistribuidor')
+                            <div class="invalid-feedback d-block" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-row mb-2">
+                    <div class="form-group col-md-8">
+                        <label for="detail" class="text-primary">Detalle <svg xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-chevrons-down">
+                                <polyline points="7 13 12 18 17 13"></polyline>
+                                <polyline points="7 6 12 11 17 6"></polyline>
+                            </svg></label>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <input type="text" wire:model.defer="montoAsignado" class="form-control form-control-sm"
+                            id="montoasig" placeholder="Asignar monto...">
                         @error('montoAsignado')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
@@ -198,12 +225,6 @@
                         @enderror
                     </div>
                 </div>
-                <label for="detail" class="text-primary">Detalle <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-down">
-                        <polyline points="7 13 12 18 17 13"></polyline>
-                        <polyline points="7 6 12 11 17 6"></polyline>
-                    </svg></label>
 
                 <div class="table-responsive table-bordered table-hover table-striped"
                     style="max-height: 360px; overflow: auto;">

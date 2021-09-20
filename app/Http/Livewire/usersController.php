@@ -23,7 +23,7 @@ class usersController extends Component
 
     public function render()
     {
-        $users = User::with('roles')->where('name', 'LIKE', "%$this->search%")->orderBy('name', 'ASC')->paginate($this->paginate);
+        $users = User::with('roles')->where('name', 'LIKE', "%$this->search%")->orderBy('idUsuario', 'desc')->paginate($this->paginate);
         $empleados = Empleado::leftjoin('users as u', 'empleado.dni', '=', 'u.dniCiudadano')->where('u.dniCiudadano', '=', NULL)->get();
         return view('livewire.Users.users', ['users' => $users, 'empleados' => $empleados, 'roles' => Role::orderBy('name', 'asc')->get()])
             ->extends('layouts.app')

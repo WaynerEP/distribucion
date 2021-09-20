@@ -11,7 +11,7 @@ use App\Models\Empleado;
 use App\Models\DetallePedido;
 use App\Models\Distribucion;
 use App\Models\DistribucionTransporte;
-
+use App\Models\EmpleadoDistribucion;
 use Carbon\Carbon;
 use DB;
 
@@ -24,7 +24,7 @@ class DistribucionController extends Component
 
     public $pagination = 8,  $zona, $distrito,
         $idTransporte, $transporte, $idConductor, $SelectedConductor, $SelectedEncargado, $email, $telefono;
-    public $idZona, $idListaPedidos, $idEncargado, $montoAsignado, $montoCombustible;
+    public $idZona, $idListaPedidos, $idEncargado, $montoAsignado, $montoCombustible, $idDistribuidor,$SelectedDistribuidor;
     public $search, $searchTransporte, $listaPedidos, $detailsProducts, $detailPedidos, $sumDetails;
 
 
@@ -42,11 +42,13 @@ class DistribucionController extends Component
             ->paginate($this->pagination);
         $conductores = DB::select('call sp_conductores');
         $encargados = DB::select('call sp_encargados');
+        $distribuidores = DB::select('call sp_distribuidores');
         $pedidos = DB::select('call pedidosListos');
-        return view('livewire.Distribucion.indexDistribucion', ['zonas' => $zonas, 'data' => $data, 'conductores' => $conductores, 'encargados' => $encargados, 'pedidos' => $pedidos])
+        return view('livewire.Distribucion.indexDistribucion', ['zonas' => $zonas, 'data' => $data, 'conductores' => $conductores, 'encargados' => $encargados, 'distribuidores' => $distribuidores, 'pedidos' => $pedidos])
             ->extends('layouts.app')
             ->section('content');;
     }
+
 
     public function mount()
     {
@@ -102,6 +104,13 @@ class DistribucionController extends Component
     }
 
 
+    public function updatedSelectedDistribuidor($value)
+    {
+        $this->idDistribuidor = $value;
+        $this->resetValidation('idDistribuidor');
+    }
+
+
     public function addLista($id, $name)
     {
         $this->idListaPedidos = $id;
@@ -122,6 +131,7 @@ class DistribucionController extends Component
                 'idListaPedidos' => 'required',
                 'idEncargado' => 'required',
                 'montoAsignado' => 'required',
+                'idDistribuidor' => 'required',
             ],
             [
                 'idZona.required' => 'Seleccione una zona',
@@ -129,8 +139,9 @@ class DistribucionController extends Component
                 'montoCombustible.required' => 'Ingrese monto para combustible',
                 'idConductor.required' => 'Seleccione un conductor',
                 'idListaPedidos.required' => 'Seleccione una lista de Pedidos',
-                'idEncargado.required' => 'Seleccione el encargado para la distribución',
+                'idEncargado.required' => 'Seleccione el encargado',
                 'montoAsignado.required' => 'Ingrese un monto',
+                'idDistribuidor.required' => 'Seleccione un Distribuidor',
             ]
         );
         $data = Distribucion::create([
@@ -146,6 +157,11 @@ class DistribucionController extends Component
             'idConductor' => $this->idConductor,
             'idDistribucion' => $idDistribucion,
             'montoCombustible' => $this->montoCombustible,
+        ]);
+
+        EmpleadoDistribucion::create([
+            'idDistribucion' => $idDistribucion,
+            'idRepartidor' => $this->idDistribuidor,
         ]);
         $this->resetUI();
         $this->emit('order-stored', 'Loadind data');
@@ -190,6 +206,7 @@ class DistribucionController extends Component
             'SelectedConductor',
             'email',
             'telefono',
+            'idDistribuidor',
         ]);
     }
 }

@@ -1,195 +1,183 @@
 @section('styles')
-    <link href="{{ asset('assets/css/apps/invoice-add.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/editors/quill/quill.snow.css') }}">
     <link href="{{ asset('assets/css/apps/todolist.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('titlePage')
-    <h3>Cmabiar Estado</h3>
+    <h3>Cambiar Estado</h3>
 @endsection
 
-<div class="row invoice layout-top-spacing layout-spacing">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="doc-container">
-            <div class="row invoice layout-top-spacing layout-spacing">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="">
-                            <div  class=" row">
-                        <div class="col-xl-9">
+<div class="row layout-top-spacing">
+    <div class="col-xl-12 col-lg-12 col-md-12">
 
-                            <div class="invoice-content">
+        <div class="mail-box-container">
+            <div class="mail-overlay"></div>
 
-                                <div class="invoice-detail-body">
-                                    <div class="invoice-detail-title">
+            <div class="tab-title">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-12 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-clipboard">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <h5 class="app-title">Todo List</h5>
+                    </div>
 
-                                        <div class="invoice-logo row d-flex">
-                                            <div class="col-sm-6 col-12 my-auto">
-                                                <img alt="avatar" src="{{ asset('assets/img/logo.png') }}"
-                                                    class="img-fluid rounded w-100">
-                                            </div>
-                                            <div class="col-sm-6 align-self-center">
-                                                <p class="inv-street-addr">A'mu Distribuciones S.A</p>
-                                                <p class="inv-email-address">amu@amudistricion.com</p>
-                                                <p class="inv-email-address">+51 963258741</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="invoice-title">
-                                            <div class="col-sm-6 text-primary">
-                                                <p class="inv-list-number"><span class="inv-title">Pedido</span>
-                                                    <span
-                                                        class="inv-number">#{{ str_pad($idPedido, 5, '0', STR_PAD_LEFT) }}</span>
-                                                </p>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div class="invoice-detail-header">
-
-                                        <div class="row justify-content-between">
-
-                                            <div class="col-xl-9 invoice-address-client">
-
-                                                <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-shopping-bag">
-                                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z">
-                                                        </path>
-                                                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                                                    </svg> Cliente:</h4>
-
-                                                <div class="invoice-address-client-fields">
-
-                                                    <div class="form-group row">
-                                                        <label for="name"
-                                                            class="col-sm-3 col-form-label col-form-label-sm">Nombre</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" wire:model="nombre"
-                                                                class="form-control form-control-sm" id="name" readonly>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="client-email"
-                                                            class="col-sm-3 col-form-label col-form-label-sm">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" wire:model="email"
-                                                                class="form-control form-control-sm" id="client-email"
-                                                                readonly>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="direccion"
-                                                            class="col-sm-3 col-form-label col-form-label-sm">Dirección</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" wire:model="direccion"
-                                                                class="form-control form-control-sm" id="client-address"
-                                                                readonly>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="dni"
-                                                            class="col-sm-3 col-form-label col-form-label-sm">DNI</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" wire:model="dni"
-                                                                class="form-control form-control-sm" id="dni" readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="invoice-detail-terms">
-                                        <div class="row justify-content-between">
-                                            <div class="col-md-3">
-                                                <div class="form-group mb-4">
-                                                    <label for="number">Número de Documento</label>
-                                                    <input type="text" wire:model="nDocumento"
-                                                        class="form-control form-control-sm" id="number" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group mb-4">
-                                                    <label for="date">Fecha</label>
-                                                    <input type="text" wire:model="fDocumento"
-                                                        class="form-control form-control-sm" id="" readonly="readonly">
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-6">
-                                                <div class="form-group mb-4">
-                                                    <label for="due mb-3">Estado del Pedido </label>
-                                                    @if ($estado != 4 && $estado != 0)
-                                                        <select id="inputState" wire:model="estadoPedido"
-                                                            class="form-control">
-                                                            <option value="" disabled>Seleccione...</option>
-                                                            <option value="0">Cancelado</option>
-                                                            <option value="1">Confirmado</option>
-                                                            <option value="2">Envio en reparto</option>
-                                                            <option value="3">Entregado</option>
-                                                        </select>
-                                                    @endif
-                                                    @if ($estado == 3)
-                                                        <span class="badge badge-success"> ENTREGADO AL CLIENTE </span>
-                                                    @endif
-                                                    @if ($estado == 0)
-                                                        <span class="badge badge-danger"> CANCELADO </span>
-                                                    @endif
-                                                </div>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3">
-                            <div class="invoice-actions-btn">
-                                <div class="invoice-action-btn">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-md-4">
-                                            {{-- @if ($estado != 3 && $estado != 0)
-                                                <a href="javascript:void(0);" wire:click="update()"
-                                                    class="btn btn-primary btn-send">
-                                                    <div wire:loading wire:target="update"
-                                                        class="spinner-border text-white mr-2 align-self-center loader-sm ">
-                                                        Loading...
-                                                    </div>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-save">
-                                                        <path
-                                                            d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
-                                                        </path>
-                                                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                                        <polyline points="7 3 7 8 15 8"></polyline>
-                                                    </svg>
-                                                    Guardar
-                                                </a>
-                                            @endif --}}
-                                        </div>
-                                        <div class="col-xl-12 col-md-4">
-                                            <a href="{{ route('listPedidos') }}" class="btn btn-success btn-download">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-corner-up-left">
-                                                    <polyline points="9 14 4 9 9 4"></polyline>
-                                                    <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
-                                                </svg> Regresar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="todoList-sidebar-scroll ps ps--active-y">
+                        <div class="col-md-12 col-sm-12 col-12 mt-4 pl-0">
+                            <ul class="nav nav-pills d-block" id="pills-tab" role="tablist">
+                                <li class="nav-item ">
+                                    <a class="nav-link list-actions {{ $tipoestado == 1 ? 'active' : '' }}"
+                                        wire:click="changePedidosByEstado('PENDIENTE','1')" href="#pills-important"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-calendar">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg> Pendientes <span
+                                            class="todo-badge badge">{{ $tipoestado == 1 ? sizeof($data) : '' }}</span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link list-actions {{ $tipoestado == 2 ? 'active' : '' }}"
+                                        wire:click="changePedidosByEstado('TOMADA','2')" href="#pills-inbox"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+                                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                                            <line x1="3" y1="6" x2="3" y2="6"></line>
+                                            <line x1="3" y1="12" x2="3" y2="12"></line>
+                                            <line x1="3" y1="18" x2="3" y2="18"></line>
+                                        </svg> Tomados <span
+                                            class="todo-badge badge">{{ $tipoestado == 2 ? sizeof($data) : '' }}</span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link list-actions {{ $tipoestado == 3 ? 'active' : '' }}"
+                                        wire:click="changePedidosByEstado('LISTA','3')" href="#pills-sentmail"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-thumbs-up">
+                                            <path
+                                                d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                            </path>
+                                        </svg> Hechos <span
+                                            class="todo-badge badge">{{ $tipoestado == 3 ? sizeof($data) : '' }}</span></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div id="todo-inbox" class="accordion todo-inbox">
+                <div class="search">
+                    <input type="text" class="form-control input-search" placeholder="Aqui puedes ver tus pedidos...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-menu mail-menu d-lg-none">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="todo-box">
+                    <div id="ct" class="todo-box-scroll">
+                        @if (count($data) > 0)
+                            @foreach ($data as $d)
+                                <div class="todo-item all-list">
+                                    <div class="todo-item-inner">
+                                        <div class="n-chk text-center">
+                                            @if ($tipoestado == 3)
+                                                <span class="badge outline-badge-success"> Listo </span>
+                                            @else
+                                                <label class="new-control new-checkbox checkbox-primary">
+                                                    <input type="checkbox"
+                                                        wire:click="changeStatePedido({{ $d->idPedido }})"
+                                                        class="new-control-input inbox-chkbox">
+                                                    <span class="new-control-indicator"></span>
+                                                </label>
+                                            @endif
+                                        </div>
+
+                                        <div class="todo-content">
+                                            <h5 class="todo-heading">
+                                                Pedido N° {{ str_pad($d->idPedido, 4, '0', STR_PAD_LEFT) }}</h5>
+                                            <p class="meta-date">{{ $d->fecha }}</p>
+                                            <p class="todo-text">
+                                                El pedido con nro de Documento {{ $d->nDocumento }}, asignado para
+                                                empaquetamiento se encuentra en estado de {{ $d->estado }}.
+                                            </p>
+                                        </div>
+
+                                        <div class="priority-dropdown custom-dropdown-icon">
+                                            <div class="dropdown p-dropdown">
+                                                <a class="dropdown-toggle warning" href="#" role="button"
+                                                    id="dropdownMenuLink-1" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-alert-octagon">
+                                                        <polygon
+                                                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2">
+                                                        </polygon>
+                                                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="16" x2="12" y2="16"></line>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="todo-item all-list">
+                                <div class="todo-item-inner">
+                                    <div class="todo-content text-center">
+                                        <h5 class="todo-heading">No tienes ningún pedido!! 📑</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div wire:loading>
+        <div class="blockUI blockOverlay"
+            style="z-index: 1200; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(27, 32, 36); opacity: 0.6;  position: fixed;">
+        </div>
+        <div class="blockUI blockMsg blockPage"
+            style="z-index: 1201; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(255, 255, 255); border: 0px; background-color: transparent; ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-loader spin">
+                <line x1="12" y1="2" x2="12" y2="6"></line>
+                <line x1="12" y1="18" x2="12" y2="22"></line>
+                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                <line x1="2" y1="12" x2="6" y2="12"></line>
+                <line x1="18" y1="12" x2="22" y2="12"></line>
+                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+            </svg>
+            Cargando
         </div>
     </div>
 </div>
+
+@section('scripts')
+
+@endsection

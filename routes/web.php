@@ -17,6 +17,8 @@ use App\Http\Livewire\ReportesController;
 use App\Http\Livewire\editPedido;
 use App\Http\Livewire\empleadosController;
 use App\Http\Livewire\ListaPedidosController;
+use App\Http\Livewire\UpdateStateController;
+use App\Http\Livewire\PedidosEntregadosController;
 
 // use App\Http\Livewire\reportesController;
 
@@ -66,15 +68,22 @@ Route::get('/reportes/excel/{empleado}/{type}',  [App\Http\Controllers\reportesC
 //     return view('Email.sendEmail');
 // });
 
-//PedidosListas
+//PedidosListas and change states of the orders
 Route::get('/listPedidos/create', ListaPedidosController::class)->name('createListOrder')->middleware('auth');
 Route::get('/listPedidos/list', [App\Http\Controllers\ListaPedidosController::class, 'index'])->name('listOrder')->middleware('auth');
 Route::get('/listPedidos/{id}/show', [App\Http\Controllers\ListaPedidosController::class, 'previewList']);
+Route::get('/listPedidos/state', UpdateStateController::class)->name('changeState')->middleware('auth');
+
 
 //DISTRIBUCION
 Route::get('/distribucion/create', DistribucionController::class)->name('nuevaDistribucion')->middleware('auth');
 Route::get('/distribucion/list', [App\Http\Controllers\distribucionController::class, 'index'])->name('listDistribucion')->middleware('auth');
 Route::get('/distribucion/{id}/show', [App\Http\Controllers\distribucionController::class, 'previewDistribucion']);
+
+
+//PEDIDOS ENNTREGADO
+Route::get('/entregar/marcar', PedidosEntregadosController::class)->name('marcarEntrega')->middleware('auth');
+
 
 
 

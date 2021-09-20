@@ -189,10 +189,15 @@
                      <li class="{{ request()->is('listPedidos/create') ? 'active' : '' }}">
                          <a href="{{ route('createListOrder') }}"> Registrar </a>
                      </li>
+                     <li class="{{ request()->is('listPedidos/state') ? 'active' : '' }}">
+                         <a href="{{ route('changeState') }}"> Marcar Estado </a>
+                     </li>
                  </ul>
              </li>
              <li class="menu {{ request()->is('distribucion/*') ? 'active' : '' }}">
-                 <a href="#starter-kit" data-toggle="collapse" aria-expanded="{{ request()->is('distribucion/*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                 <a href="#starter-kit" data-toggle="collapse"
+                     aria-expanded="{{ request()->is('distribucion/*') ? 'true' : 'false' }}"
+                     class="dropdown-toggle">
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -209,7 +214,8 @@
                          </svg>
                      </div>
                  </a>
-                 <ul class="collapse submenu {{ request()->is('distribucion/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled" id="starter-kit" data-parent="#accordionExample">
+                 <ul class="collapse submenu {{ request()->is('distribucion/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                     id="starter-kit" data-parent="#accordionExample">
                      <li class="{{ request()->is('distribucion/list') ? 'active' : '' }}">
                          <a href="{{ route('listDistribucion') }}"> Listado </a>
                      </li>
@@ -218,8 +224,9 @@
                      </li>
                  </ul>
              </li>
-             <li class="menu">
-                 <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+             <li class="menu {{ request()->is('entregar/*') ? 'active' : '' }}">
+                 <a href="#pages" data-toggle="collapse"
+                     aria-expanded="{{ request()->is('entregar/*') ? 'true' : 'false' }}" class="dropdown-toggle">
                      <div class="">
                         <svg xmlns=" http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -236,14 +243,14 @@
                          </svg>
                      </div>
                  </a>
-                 <ul class="collapse submenu list-unstyled" id="pages" data-parent="#accordionExample">
-                     <li>
-                         <a href="pages_helpdesk.html"> Marcar Entregas </a>
+                 <ul class="collapse submenu {{ request()->is('entregar/*') ? 'recent-submenu mini-recent-submenu show' : '' }} list-unstyled"
+                     id="pages" data-parent="#accordionExample">
+                     <li class="{{ request()->is('entregar/marcar') ? 'active' : '' }}">
+                         <a href="{{ route('marcarEntrega') }}"> Marcar Entregas </a>
                      </li>
-                     <li>
+                     {{-- <li>
                          <a href="pages_contact_us.html"> Reportar Entregas </a>
-                     </li>
-
+                     </li> --}}
                  </ul>
              </li>
              <li class="menu menu-heading">
