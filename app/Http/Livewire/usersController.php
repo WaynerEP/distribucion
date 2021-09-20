@@ -10,6 +10,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\Empleado;
+use DB;
 
 class usersController extends Component
 {
@@ -24,7 +25,7 @@ class usersController extends Component
     public function render()
     {
         $users = User::with('roles')->where('name', 'LIKE', "%$this->search%")->orderBy('idUsuario', 'desc')->paginate($this->paginate);
-        $empleados = Empleado::leftjoin('users as u', 'empleado.dni', '=', 'u.dniCiudadano')->where('u.dniCiudadano', '=', NULL)->get();
+        $empleados = DB::select('call sp_empleados');
         return view('livewire.Users.users', ['users' => $users, 'empleados' => $empleados, 'roles' => Role::orderBy('name', 'asc')->get()])
             ->extends('layouts.app')
             ->section('content');

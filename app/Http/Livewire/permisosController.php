@@ -20,7 +20,7 @@ class permisosController extends Component
 
     public function render()
     {
-        $permissions = Permission::where('name', 'LIKE', "%$this->search%")->orderBy('name', 'ASC')->paginate($this->paginate);
+        $permissions = Permission::where('name', 'LIKE', "%$this->search%")->orderBy('id', 'ASC')->paginate($this->paginate);
         return view('livewire.Users.permisos', ['permissions' => $permissions])
             ->extends('layouts.app')
             ->section('content');

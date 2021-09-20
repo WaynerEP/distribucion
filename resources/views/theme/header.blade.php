@@ -38,7 +38,7 @@
             <li class="nav-item dropdown language-dropdown more-dropdown">
                 <div class="dropdown custom-dropdown-icon">
                     <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img src="assets/img/flag-sp.svg"
+                        aria-haspopup="true" aria-expanded="false"><img src="{{ asset('assets/img/flag-sp.svg') }}"
                             class="flag-width" alt="flag"><span>Spanish</span> <svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

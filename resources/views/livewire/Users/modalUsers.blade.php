@@ -25,9 +25,7 @@
                             <select id="inputState" wire:model="Empleado" class="form-control">
                                 <option selected>Seleccione...</option>
                                 @foreach ($empleados as $e)
-                                    <option value="{{ $e->idEmpleado }}">👨‍💼 - {{ $e->ciudadano->nombre }}
-                                        {{ $e->ciudadano->aPaterno }} {{ $e->ciudadano->aMaterno }} -
-                                        {{ $e->dni }}</option>
+                                    <option value="{{ $e->idEmpleado }}">👨‍💼 - {{ $e->nombre }} </option>
                                 @endforeach
                             </select>
                         </div>
