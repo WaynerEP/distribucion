@@ -46,6 +46,7 @@
                                 <th>#</th>
                                 <th>PERFIL</th>
                                 <th>EMAIL CORPORATIVO</th>
+                                <th>DNI</th>
                                 <th>ESTADO</th>
                                 <th>ROL(ES)</th>
                                 <th>ACCIONES</th>
@@ -71,6 +72,7 @@
                                             </div>
                                         </td>
                                         <td>{{ $u->email }}</td>
+                                        <td>{{ $u->dniCiudadano }}</td>
                                         <td>
                                             @switch ($u->estado)
                                                 @case(0)
